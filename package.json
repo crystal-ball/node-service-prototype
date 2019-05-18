@@ -1,0 +1,41 @@
+{
+  "name": "@crystal-ball/node-service-prototype",
+  "version": "0.0.0",
+  "description": "Prototypical Node.js service",
+  "main": "src/index.js",
+  "keywords": [
+    "prototype",
+    "nodejs",
+    "service"
+  ],
+  "contributors": [
+    "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)"
+  ],
+  "license": "ISC",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "npm run format",
+    "lint": "eslint src",
+    "format": "prettier --write src/*.js"
+  },
+  "dependencies": {
+    "express": "4.17.0"
+  },
+  "devDependencies": {
+    "@crystal-ball/commitizen-base": "1.0.0",
+    "@crystal-ball/prettier-base": "1.0.0",
+    "eslint-config-eloquence": "11.0.0",
+    "husky": "2.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-adapter-eslint"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
+    }
+  },
+  "prettier": "@crystal-ball/prettier-base"
+}
