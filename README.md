@@ -71,3 +71,8 @@ _Prototypical Node.js service for reference and experimentation._
 ## Testing workflows
 
 ...
+
+## TypeScript
+
+1. Install TS required
+2. VSCode ESLint doesn't lint .ts files by default
