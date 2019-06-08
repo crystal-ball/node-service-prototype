@@ -2,17 +2,27 @@
 
 const express = require('express')
 
+const { setupLogger } = require('./utils/logger')
+
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send({ data: { message: '🔮 MAGIC' } })
-})
+const initializeService = async () => {
+  const logger = await setupLogger()
 
-app
-  .listen(3000, () => {
-    console.log('Service listening on http://localhost:3000')
+  app.get('/', (req, res) => {
+    logger.log('REQ RECEIVED')
+    res.send({ data: { message: '🔮 MAGIC' } })
   })
-  .on('error', err => {
-    console.log(err)
-    process.exit(1)
-  })
+
+  app
+    .listen(3000, () => {
+      logger.log('Service listening on http://localhost:3000')
+    })
+    .on('error', err => {
+      console.log(err)
+      process.exit(1)
+    })
+}
+
+// Start the party 🎉
+initializeService()
