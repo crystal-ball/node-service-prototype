@@ -6,7 +6,12 @@ const { initializeConfigs } = require('./configs')
 const { initializeLogger } = require('./utils/logger')
 const { initializeDb } = require('./db')
 const { initializeRoutes } = require('./router')
+const { errorHandler } = require('./middleware/error-handler')
 
+/**
+ * Service entry point will manage initializing service resources and then
+ * start service instance
+ */
 const initializeService = async () => {
   const app = express()
 
@@ -16,9 +21,11 @@ const initializeService = async () => {
   const logger = await initializeLogger()
   const db = await initializeDb()
 
-  // --- Initialize service routes ---
+  // --- Initialize service middleware and routes ---
 
   await initializeRoutes(app)
+  // Service error handler will ensure only sanitized error info is exposed
+  app.use(errorHandler)
 
   // --- Create service instance ---
 

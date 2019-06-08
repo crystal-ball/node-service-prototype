@@ -71,3 +71,11 @@ _Prototypical Node.js service for reference and experimentation._
 ## Testing workflows
 
 ...
+
+## Convetions
+
+- Service resources (eg logger, db, configs) expose an async initialize fn that
+  can be called once during service initialization which will override the
+  resource defaults with environment appropriate ones. This lets us easily use
+  the resources in tests with the defaults, and set correct values in
+  production.
