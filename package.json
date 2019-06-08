@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "express": "4.17.1",
-    "pg": "7.11.0"
+    "express-pino-logger": "4.0.0",
+    "pg": "7.11.0",
+    "pino": "5.12.6"
   },
   "devDependencies": {
     "@crystal-ball/commit-semantics": "1.0.0",
@@ -38,7 +40,8 @@
     "husky": "2.4.0",
     "jest": "24.8.0",
     "node-pg-migrate": "3.21.1",
-    "nodemon": "1.19.1"
+    "nodemon": "1.19.1",
+    "pino-pretty": "3.1.0"
   },
   "config": {
     "commitizen": {

@@ -10,20 +10,25 @@ let pool
 /**
  * Handle creating connections pool to database
  */
-const initializeDb = () => {
+const initializeDb = async () => {
   pool = new Pool({
     user: configs.pgUser,
     password: configs.pgPassword,
     database: configs.pgDatabase,
   })
 
-  logger.log('Pool successfully created')
+  pool.on('error', err => {
+    logger.fatal('Unexpected error on idle client', err)
+    process.exit(1)
+  })
+
+  logger.info('Pool successfully created')
 
   return {
     close: async () => {
       try {
         await pool.end()
-        logger.log('Pool successfully closed')
+        logger.info('Pool successfully closed')
       } catch (err) {
         logger.error('Failed to close pool', err)
       }
@@ -37,7 +42,7 @@ const initializeDb = () => {
 const selectUsernames = async () => {
   try {
     const result = await pool.query('SELECT * FROM users')
-    logger.log('Usernames', result.rows)
+    logger.info('Usernames', result.rows)
     return result.rows.map(row => row.name)
   } catch (err) {
     logger.error('Failed querying usernames', err)

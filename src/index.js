@@ -20,10 +20,12 @@ const initializeService = async () => {
   // --- Initialize service resources ---
 
   const configs = await initializeConfigs()
-  const logger = await initializeLogger()
+  const loggers = await initializeLogger()
   const db = await initializeDb()
 
   // --- Initialize service middleware and routes ---
+
+  app.use(loggers.expressLogger)
 
   await initializeRoutes(app)
   // Service error handler will ensure only sanitized error info is exposed
@@ -33,7 +35,7 @@ const initializeService = async () => {
 
   const server = app
     .listen(configs.port, () => {
-      logger.log('Service listening on http://localhost:3000')
+      loggers.logger.info('Service listening on http://localhost:3000')
     })
     .on('error', err => {
       console.log(err)
@@ -44,11 +46,11 @@ const initializeService = async () => {
 
   const gracefulShutdown = async () => {
     try {
-      console.log('Shutting down service...')
+      loggers.logger.info('Shutting down service...')
 
       await Promise.all([db.close(), server.close()])
 
-      console.log('Server successfully shut down')
+      loggers.logger.info('Server successfully shut down')
       process.exit(0)
     } catch (err) {
       console.error('Failed to shutdown gracefully', err)
