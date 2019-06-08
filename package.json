@@ -18,9 +18,11 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./src/index.js",
-    "start:dev": "nodemon --inspect",
+    "start:dev": "nodemon --inspect --watch src",
     "migrate": "node-pg-migrate",
-    "test": "npm run format",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "JEST_COLLECT_COVERAGE=1 NODE_ENV=test jest",
+    "test:watch": "jest --watch",
     "lint": "NODE_ENV=test eslint --format=pretty src/**/*.js",
     "format": "prettier --write src/**/*.js"
   },
@@ -31,8 +33,10 @@
   "devDependencies": {
     "@crystal-ball/commit-semantics": "1.0.0",
     "@crystal-ball/prettier-base": "1.1.0",
+    "@types/jest": "24.0.13",
     "eslint-config-eloquence": "11.2.0",
     "husky": "2.4.0",
+    "jest": "24.8.0",
     "node-pg-migrate": "3.21.1",
     "nodemon": "1.19.1"
   },

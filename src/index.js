@@ -13,6 +13,8 @@ const { errorHandler } = require('./middleware/error-handler')
  * start service instance
  */
 const initializeService = async () => {
+  console.log('Begin initializing service 🤖')
+
   const app = express()
 
   // --- Initialize service resources ---
@@ -56,6 +58,10 @@ const initializeService = async () => {
 
   process.on('SIGTERM', gracefulShutdown)
   process.on('SIGINT', gracefulShutdown)
+
+  // Nodemon shutdown signal, ref:
+  // https://github.com/remy/nodemon#controlling-shutdown-of-your-script
+  process.once('SIGUSR2', gracefulShutdown)
 }
 
 // Start the party 🎉
