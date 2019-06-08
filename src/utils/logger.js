@@ -1,11 +1,17 @@
 'use strict'
 
-const logger = {}
+/**
+ * Service logger
+ */
+const logger = {
+  log: () => {},
+  error: () => {},
+}
 
 /**
- * Setup the logger for current service instance env
+ * Handle initializing logger for current service instance env
  */
-const setupLogger = async () => {
+const initializeLogger = async () => {
   /* eslint-disable no-console */
   /**
    * Logger conventions:
@@ -18,4 +24,4 @@ const setupLogger = async () => {
   return logger
 }
 
-module.exports = { setupLogger, logger }
+module.exports = { initializeLogger, logger }

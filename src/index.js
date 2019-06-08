@@ -1,39 +1,29 @@
 'use strict'
 
 const express = require('express')
-const { Pool } = require('pg')
 
-const { setupLogger } = require('./utils/logger')
-
-const app = express()
+const { initializeConfigs } = require('./configs')
+const { initializeLogger } = require('./utils/logger')
+const { initializeDb } = require('./db')
+const { initializeRoutes } = require('./router')
 
 const initializeService = async () => {
-  const logger = await setupLogger()
+  const app = express()
 
-  const pool = new Pool({
-    user: 'rad_user',
-    password: 'rad_password',
-    database: 'service_db',
-  })
+  // --- Initialize service resources ---
 
-  app.get('/', (req, res) => {
-    logger.log('REQ RECEIVED')
-    res.send({ data: { message: '🔮 MAGIC' } })
-  })
+  const configs = await initializeConfigs()
+  const logger = await initializeLogger()
+  const db = await initializeDb()
 
-  app.get('/usernames', async (req, res) => {
-    try {
-      const result = await pool.query('SELECT * FROM account')
-      console.log(result.rows)
-      res.send({ data: result.rows })
-    } catch (err) {
-      logger.error(err)
-      res.status(500).send()
-    }
-  })
+  // --- Initialize service routes ---
+
+  await initializeRoutes(app)
+
+  // --- Create service instance ---
 
   const server = app
-    .listen(3000, () => {
+    .listen(configs.port, () => {
       logger.log('Service listening on http://localhost:3000')
     })
     .on('error', err => {
@@ -41,10 +31,14 @@ const initializeService = async () => {
       process.exit(1)
     })
 
+  // --- Setup service graceful shutdown ---
+
   const gracefulShutdown = async () => {
-    console.log('Shutting down ...')
     try {
-      await Promise.all([pool.end(), server.close()])
+      console.log('Shutting down service...')
+
+      await Promise.all([db.close(), server.close()])
+
       console.log('Server successfully shut down')
       process.exit(0)
     } catch (err) {
