@@ -27,7 +27,7 @@
     "express": "4.17.1"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-base": "1.0.0",
+    "@crystal-ball/commit-semantics": "1.0.0",
     "@crystal-ball/prettier-base": "1.1.0",
     "eslint-config-eloquence": "11.2.0",
     "husky": "2.4.0",
@@ -35,7 +35,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-adapter-eslint"
+      "path": "@crystal-ball/commitizen-adapter"
     }
   },
   "husky": {
