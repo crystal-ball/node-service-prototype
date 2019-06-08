@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
 
-  database:
+  postgres:
     image: postgres:11.3
     restart: always
     ports:
@@ -10,4 +10,4 @@ services:
     environment:
       POSTGRES_USER: rad_user
       POSTGRES_PASSWORD: rad_password
-      POSTGRES_DB: service_db
+      POSTGRES_DB: rad_db

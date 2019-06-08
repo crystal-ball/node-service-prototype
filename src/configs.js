@@ -7,7 +7,7 @@ const configs = {
   port: 3000,
   pgUser: 'rad_user',
   pgPassword: 'rad_password',
-  pgDatabase: 'service_db',
+  pgDatabase: 'rad_db',
 }
 
 /**

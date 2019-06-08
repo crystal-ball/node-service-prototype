@@ -2,8 +2,8 @@
 
 const { Pool } = require('pg')
 
-const { configs } = require('./configs')
-const { logger } = require('./utils/logger')
+const { configs } = require('../configs')
+const { logger } = require('../utils/logger')
 
 let pool
 
@@ -36,9 +36,9 @@ const initializeDb = () => {
  */
 const selectUsernames = async () => {
   try {
-    const result = await pool.query('SELECT * FROM account')
-    console.log(result.rows)
-    return result.rows
+    const result = await pool.query('SELECT * FROM users')
+    logger.log('Usernames', result.rows)
+    return result.rows.map(row => row.name)
   } catch (err) {
     logger.error('Failed querying usernames', err)
     throw err

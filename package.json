@@ -18,7 +18,8 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./src/index.js",
-    "start:dev": "nodemon --inspect ./src/index.js",
+    "start:dev": "nodemon --inspect",
+    "migrate": "node-pg-migrate",
     "test": "npm run format",
     "lint": "NODE_ENV=test eslint --format=pretty src/**/*.js",
     "format": "prettier --write src/**/*.js"
@@ -32,6 +33,7 @@
     "@crystal-ball/prettier-base": "1.1.0",
     "eslint-config-eloquence": "11.2.0",
     "husky": "2.4.0",
+    "node-pg-migrate": "3.21.1",
     "nodemon": "1.19.1"
   },
   "config": {
