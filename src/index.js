@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const helmet = require('helmet')
 
 const { initializeConfigs } = require('./configs')
 const { initializeLogger } = require('./utils/logger')
@@ -25,6 +26,7 @@ const initializeService = async () => {
 
   // --- Initialize service middleware and routes ---
 
+  app.use(helmet())
   app.use(loggers.expressLogger)
 
   await initializeRoutes(app)
