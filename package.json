@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "Prototypical Node.js service",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crystal-ball/node-service-prototype.git"
+  },
   "keywords": [
     "prototype",
     "nodejs",
@@ -14,18 +18,20 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./src/index.js",
+    "start:dev": "nodemon --inspect ./src/index.js",
     "test": "npm run format",
-    "lint": "eslint src",
-    "format": "prettier --write src/*.js"
+    "lint": "NODE_ENV=test eslint --format=pretty src/**/*.js",
+    "format": "prettier --write src/**/*.js"
   },
   "dependencies": {
-    "express": "4.17.0"
+    "express": "4.17.1"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "1.0.0",
-    "@crystal-ball/prettier-base": "1.0.0",
-    "eslint-config-eloquence": "11.0.0",
-    "husky": "2.3.0"
+    "@crystal-ball/prettier-base": "1.1.0",
+    "eslint-config-eloquence": "11.2.0",
+    "husky": "2.4.0",
+    "nodemon": "1.19.1"
   },
   "config": {
     "commitizen": {
