@@ -81,10 +81,24 @@ npm run start:dev
 
 ## Testing workflows
 
-...
+Unit and integration tests are run with Jest. Unit tests are colocated with the
+files under test.
+
+```sh
+npm run test:unit
+```
 
 ## 📝 Conventions
 
+- Express server setup
+- 404 route handler
+- Custom error sanitization middleware
+- Jest configs
+- Dev nodemon configs
+- ESLint, Prettier and Commitizen configs
+- Centralized logger
+- Centralized configs managment
+- Async route handler wrapper
 - Manage Postgres migrations with the migration scripts and `node-pg-migrate`
 - Service resources (eg logger, db, configs) expose an async initialize fn that
   can be called once during service initialization which will override the
@@ -125,6 +139,10 @@ DATABASE_URL=postgres://rad_user:rad_password@localhost:5432/rad_db npm run migr
 - [ ] Development Docker setup
 - [ ] Jest testing defaults
 - [ ] PM2 setup for running service in production
+- [ ] Route body and params validations
+- [ ] Custom error classes
+- [ ] Express production configuration
+- [ ] Setup proper logging with pino
 
 <!-- Links -->
 
