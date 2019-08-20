@@ -42,7 +42,7 @@
     "jest": "24.8.0",
     "node-pg-migrate": "3.21.1",
     "nodemon": "1.19.1",
-    "pino-pretty": "3.1.0"
+    "pino-pretty": "3.2.1"
   },
   "config": {
     "commitizen": {
