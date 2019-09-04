@@ -29,20 +29,20 @@
   "dependencies": {
     "express": "4.17.1",
     "express-pino-logger": "4.0.0",
-    "helmet": "3.18.0",
-    "pg": "7.11.0",
-    "pino": "5.12.6"
+    "helmet": "3.20.1",
+    "pg": "7.12.1",
+    "pino": "5.13.2"
   },
   "devDependencies": {
-    "@crystal-ball/commit-semantics": "1.0.0",
-    "@crystal-ball/prettier-base": "1.1.0",
-    "@types/jest": "24.0.13",
-    "eslint-config-eloquence": "11.2.0",
-    "husky": "2.4.0",
-    "jest": "24.8.0",
-    "node-pg-migrate": "3.21.1",
-    "nodemon": "1.19.1",
-    "pino-pretty": "3.1.0"
+    "@crystal-ball/commit-semantics": "1.2.0",
+    "@crystal-ball/prettier-base": "1.4.0",
+    "@types/jest": "24.0.18",
+    "eslint-config-eloquence": "12.4.0",
+    "husky": "3.0.5",
+    "jest": "24.9.0",
+    "node-pg-migrate": "3.22.0",
+    "nodemon": "1.19.2",
+    "pino-pretty": "3.2.1"
   },
   "config": {
     "commitizen": {
