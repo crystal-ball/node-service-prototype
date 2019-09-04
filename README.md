@@ -35,7 +35,7 @@
 </div>
 
 <p align="center">
-  <em>Prototypical Node.js service for reference and experimentation.</em>
+  <em>Prototypical Node.js service for Crystal Ball Projects</em>
 </p>
 
 ## Setup
