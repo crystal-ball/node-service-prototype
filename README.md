@@ -1,5 +1,5 @@
-<div align="center">
-  <img src="./docs/assets/package-header.png" alt="Node.js service prototype">
+<div align="right">
+  <img height=75 src="./docs/assets/readme-header.png" alt="Node.js service prototype">
 </div>
 
 ---
