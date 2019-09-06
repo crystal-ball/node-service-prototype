@@ -6,19 +6,20 @@ node_js:
 
 # Cache dependencies
 cache: npm
+
 # Default for install is npm ci w/ package-lock.json
 # install
 
 # Setup Code Climate test reporter
-# before_script:
-#   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-#   - chmod +x ./cc-test-reporter
-#   - ./cc-test-reporter before-build
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 # Default for script lifecycle is npm test
 # script
 
 # Call Code Climate reporter with results, note the --prefix option is used to
 # strip the file paths output from the Docker container
-# after_script:
-#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

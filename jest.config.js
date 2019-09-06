@@ -1,14 +1,22 @@
 'use strict'
 
 module.exports = {
+  // Provides nice test output of what's being run
   verbose: true,
+
+  // It's a Node project 😇
   testEnvironment: 'node',
 
-  // 😢 https://github.com/facebook/jest/issues/8036
-  // notify: !!process.env.JEST_NOTIFY,
+  // OS notifications of test results is an opt in feature, enable by setting
+  // a truthy env value in your shell environment
+  notify: Boolean(process.env.ENABLE_JEST_NOTIFICATIONS),
 
-  // Opt in to collect coverage with a text-summary of results
-  collectCoverage: !!process.env.JEST_COLLECT_COVERAGE,
-  coverageReporters: ['text-summary'],
+  // Ignore Cypress acceptance tests
+  testPathIgnorePatterns: ['/node_modules/'],
+
+  // Collect test coverage of source files (excluding stories), report
+  // text-summary for devs and lcov for reporting to Code Climate in CI/CD envs.
+  collectCoverage: true,
+  coverageReporters: ['text-summary', 'lcov'],
   collectCoverageFrom: ['src/**/*.js'],
 }
