@@ -2,6 +2,7 @@
 
 const { logger } = require('../utils/logger')
 
+/* eslint-disable max-params */
 /**
  * Service error handler will log the complete error details before sending a
  * sanitized error response to the client.

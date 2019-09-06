@@ -10,7 +10,7 @@ let pool
 /**
  * Handle creating connections pool to database
  */
-const initializeDb = async () => {
+const initializeDb = () => {
   pool = new Pool({
     user: configs.pgUser,
     password: configs.pgPassword,

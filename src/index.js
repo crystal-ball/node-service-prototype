@@ -14,6 +14,7 @@ const { errorHandler } = require('./middleware/error-handler')
  * start service instance
  */
 const initializeService = async () => {
+  // eslint-disable-next-line no-console
   console.log('Begin initializing service 🤖')
 
   const app = express()
@@ -40,6 +41,7 @@ const initializeService = async () => {
       loggers.logger.info('Service listening on http://localhost:3000')
     })
     .on('error', err => {
+      // eslint-disable-next-line no-console
       console.log(err)
       process.exit(1)
     })
@@ -55,6 +57,7 @@ const initializeService = async () => {
       loggers.logger.info('Server successfully shut down')
       process.exit(0)
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to shutdown gracefully', err)
       process.exit(1)
     }

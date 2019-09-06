@@ -16,7 +16,7 @@ const logger = pino(options)
 /**
  * Handle initializing logger for current service instance env
  */
-const initializeLogger = async () => ({
+const initializeLogger = () => ({
   expressLogger: expressPinoLogger({ logger }),
   logger,
 })

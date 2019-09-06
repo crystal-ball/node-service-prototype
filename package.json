@@ -20,16 +20,16 @@
     "start": "node ./src/index.js",
     "start:dev": "nodemon --inspect --watch src",
     "migrate": "node-pg-migrate",
-    "test": "npm run lint && npm run test:unit",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "NODE_ENV=test eslint --format=pretty src",
     "test:unit": "JEST_COLLECT_COVERAGE=1 NODE_ENV=test jest",
     "test:watch": "jest --watch",
-    "lint": "NODE_ENV=test eslint --format=pretty src/**/*.js",
-    "format": "prettier --write src/**/*.js"
+    "format": "prettier --write '*.{js,json,md}' '**/*.{js,json,md}'"
   },
   "dependencies": {
     "express": "4.17.1",
     "express-pino-logger": "4.0.0",
-    "helmet": "3.20.1",
+    "helmet": "3.21.0",
     "pg": "7.12.1",
     "pino": "5.13.2"
   },

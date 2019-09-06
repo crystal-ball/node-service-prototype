@@ -13,7 +13,7 @@ const configs = {
 /**
  * Handle initalizing instance configs for environment
  */
-const initializeConfigs = async () => {
+const initializeConfigs = () => {
   // Overwrite default configs with environment values if set
   ;['PORT', 'PG_USER', 'PG_PASSWORD', 'PG_DATBASE'].forEach(config => {
     const value = process.env[config]
