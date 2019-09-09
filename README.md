@@ -1,8 +1,6 @@
-<div align="right">
+<h1 align="right">
   <img height=75 src="./docs/assets/readme-header.png" alt="Node.js service prototype">
-</div>
-
----
+</h1>
 
 <div align="center">
 <!-- prettier-ignore-start -->
