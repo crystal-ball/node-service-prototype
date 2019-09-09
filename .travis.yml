@@ -23,3 +23,11 @@ before_script:
 # strip the file paths output from the Docker container
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+# ☎️ Slack
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
+    rooms:
+      secure: abfOK2nC9IM4h82OxvPE8FsUZ8HTwi/pzijJ9ddWWJga7Dr1xo5YWl67b1s1DJPv+kl/ub/QCe6U5b6vXmR0HA+TNluQNvMcUmF12Fjl3FxKpUE0NUuxWmbrs7JigPUKammjgDemyabStnkWPrEh5Nh4krBONgSBk6xyH/ZZgyy1l9dGT+DnBwFA96cRsYBhdtkTye1fD4jkgbPMmzQJkN5f3neatoMQ9lT7VtwCsk8BhYz6mfjb1ohwEHtEBYKlw+uStGXodxQ+OaHSZXlbR/Muh5ER7Kgm3g+5uM915Fwrgg2EtHqeLMt/k3PXFDemHWndem2mUhwL+RyLVHfUaW5gF/yElqicvtQ+LGgmhq3W0oz3HsoGFu3Bgt3cASfq/6URnnHZ+ETAiK1Rgc4tAjGf09VJe0pb3N2eXDt1AxNkSqPEsgFH9GHVBjJBbQHGlvcuz0JsGO8zC3BmwXxNBGfV9BnsG0OBDkuQZaO574od7tten9F5TqPoS6hALD499TzuoeOxvW0iYSVXHmWuIvkyc/RdEvzr3bRwY9iLc4I4ylIc2QZue1OSpbEAkGJ/utBdy8XPjb2FZY46RQ0q9EV5kbXKRyu4iU9lm+3/4E7frkvON2ZK5CdyN+1YAl/TR/pNbNuDo9Z3qY7mN02jib9hDJlyk+kAMs3dNaHtAxo=

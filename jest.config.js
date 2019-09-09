@@ -11,9 +11,6 @@ module.exports = {
   // a truthy env value in your shell environment
   notify: Boolean(process.env.ENABLE_JEST_NOTIFICATIONS),
 
-  // Ignore Cypress acceptance tests
-  testPathIgnorePatterns: ['/node_modules/'],
-
   // Collect test coverage of source files (excluding stories), report
   // text-summary for devs and lcov for reporting to Code Climate in CI/CD envs.
   collectCoverage: true,
