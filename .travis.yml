@@ -4,6 +4,11 @@ language: node_js
 node_js:
   - '10'
 
+# safelist
+branches:
+  only:
+    - master
+
 # Cache dependencies
 cache: npm
 
