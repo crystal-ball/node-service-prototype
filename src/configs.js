@@ -4,7 +4,7 @@
  * Service instance environment configs
  */
 const configs = {
-  port: 3000,
+  port: 9000,
   pgUser: 'rad_user',
   pgPassword: 'rad_password',
   pgDatabase: 'rad_db',
