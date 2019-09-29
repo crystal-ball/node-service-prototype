@@ -1,1 +1,4 @@
-node_modules
+.git/
+node_modules/
+.vscode/
+docker-compose*.yml

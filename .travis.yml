@@ -2,7 +2,7 @@
 
 language: node_js
 node_js:
-  - '10'
+  - '12'
 
 # safelist
 branches:
@@ -22,7 +22,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 # Default for script lifecycle is npm test
-# script
+script: npm run test:lint && npm run test:unit
 
 # Call Code Climate reporter with results, note the --prefix option is used to
 # strip the file paths output from the Docker container

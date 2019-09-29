@@ -1,0 +1,50 @@
+version: '2.4'
+
+# Contains a pg and service container set up for local testing. Service is
+# exposed at 9001 and pg at 5433
+
+services:
+  test-postgres:
+    image: postgres:11.3
+    healthcheck:
+      test: pg_isready -h 127.0.0.1 -d test_db -U test_user
+      interval: 5s
+      start_period: 1s
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_db
+
+  test-node-service-prototype:
+    build:
+      context: .
+      target: prod
+    # Mount the local src files for running acceptance tests against container
+    # without having to rebuild
+    volumes:
+      - .:/opt/service:delegated
+      - test-node-service-prototype:/opt/service/node_modules
+    ports:
+      - '9001:9000'
+    healthcheck:
+      # Slow down start period and back off interval for service container when
+      # testing to minimize log noise from healthcheck endpoint
+      start_period: 5s
+      interval: 60s
+    environment:
+      SERVICE_HOST: '0.0.0.0'
+      SERVICE_PORT: 9000
+      POSTGRES_HOST: test-postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DATABASE: test_db
+    depends_on:
+      test-postgres:
+        condition: service_healthy
+
+volumes:
+  test-node-service-prototype:

@@ -1,9 +1,9 @@
 'use strict'
 
-jest.mock('../utils/logger.js')
+jest.mock('../logger.js')
+const { logger } = require('../logger')
 
-const { errorHandler } = require('./error-handler')
-const { logger } = require('../utils/logger')
+const { initalizeErrorHandlers, unknownErrorHandler } = require('./error-handlers')
 
 const mockResponse = (status, send, options) => {
   const res = { ...options }
@@ -19,7 +19,17 @@ const mockResponse = (status, send, options) => {
 }
 
 describe('Error Handler', () => {
-  test('When an error is handled, then only sanitized errors are responded', () => {
+  test('When initialize hook is called, then error handlers are mounted', async () => {
+    const app = {
+      use: jest.fn(),
+    }
+
+    await initalizeErrorHandlers(app)
+
+    expect(app.use).toHaveBeenCalled()
+  })
+
+  test('When an unknown error is handled, then only sanitized responses are sent', () => {
     const testError = new Error('Oh no')
     const mockLogger = jest.spyOn(logger, 'error')
     const req = () => {}
@@ -27,10 +37,12 @@ describe('Error Handler', () => {
     const send = jest.fn()
     const res = mockResponse(status, send, { headersSent: false })
 
-    errorHandler(testError, req, res)
+    unknownErrorHandler(testError, req, res)
 
     expect(mockLogger).toHaveBeenCalledWith(testError)
     expect(status).toHaveBeenCalledWith(500)
-    expect(send).toHaveBeenCalledWith({ error: 'Internal server error' })
+    expect(send).toHaveBeenCalledWith({
+      error: { code: 'INTERNAL_ERROR', message: 'Internal server error' },
+    })
   })
 })

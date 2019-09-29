@@ -1,7 +1,7 @@
 # --- 1️⃣ Base setup ---
 # Setup base image, workdir and production dependencies used in all stages
 
-FROM node:10.16.3-alpine as base
+FROM node:12.10.0-alpine as base
 
 # Dynamic label values should be set with env variables at build time
 ARG CREATED_DATE=not-set
@@ -17,10 +17,10 @@ LABEL org.opencontainers.image.source=https://github.com/crystal-ball/node-servi
 LABEL org.opencontainers.image.licenses=ISC
 LABEL com.danhedgecock.nodeversion=$NODE_VERSION
 
-# Expose 9000 for service, 9229 for nodemon and 9230 for tests debugging
+# Expose 9000 for service, 9001 for tests debugging, and 9229 for Nodemon
 ARG PORT=9000
 ENV PORT $PORT
-EXPOSE $PORT 9229 9230
+EXPOSE $PORT 9001 9229
 
 # Setting production for Node env will ensure only production dependencies are
 # installed by `npm ci`
@@ -70,7 +70,7 @@ CMD ["npm", "test"]
 FROM base as pre-production
 
 # Copy files needed to run production service
-COPY --chown=node:node ["./migrations", "./src", "./LICENSE.md", "./"]
+COPY --chown=node:node ["./migrations", "./scripts", "./src", "./LICENSE.md", "./"]
 
 # --- 5️⃣ Security scanning
 FROM pre-production as security-scans

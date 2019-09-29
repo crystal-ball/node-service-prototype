@@ -42,92 +42,193 @@
   <em>Prototypical Node.js service for Crystal Ball Projects</em>
 </p>
 
-## Setup
+- [Features](#-project-features)
+- [Project install and setup](#-project-install-and-setup)
+- [Docker architecture](#-docker-architecture)
+- [Testing workflows](#-testing-workflows)
+- [Development workflows](#-development-workflows)
+- [Debugging with VSCode](#-debugging-with-vscode)
+- [Service and project conventions guides](#-service-and-project-convention-guides)
+- [Roadmap](#-roadmap)
+
+---
+
+## ✨ Project features
+
+- Docker first development and testing workflow setup
+- Lint, unit, integration and acceptance testing suites
+- Development and testing debug configurations
+- Custom service error classes and handlers
+- Request content validation with JSON schemas
+- Postgres schema migrations management
+- Service healthcheck script and Docker integration
+- Graceful shutdown with proper signal handling
+- Centralized configuration, logging and database access managemen
+
+## 🏗 Project install and setup
+
+This project is a Docker first project, and requires that you have Docker
+installed on your machine. Setup includes optionally installing dependencies for
+local tooling, running the database migrations, and starting the Docker
+containers.
 
 ```sh
+# Development and test workflows use Docker, but installing packages is still
+# recommended for ESLint, Prettier, etc.
 npm install
+
+# Build and start the development containers with Docker Compose (shorthand
+# for `docker-compose up`)
+npm start
+
+# Start shell session in service container, then run pg migrations and exit
+docker-compose exec node-service-prototype /bin/sh
+npm run migrations:up
+exit
 ```
 
-## Development workflows
+The service should now be running and ready to accept requests at
+http://localhost:9000 🎉
 
-Service external resources are managed with Docker Compose and the service is
-run with [Nodemon][nodemon].
+## 🐳 Docker architecture
+
+Local development and testing workflows within the project are setup to be run
+with Docker containers and npm scripts are provided for easy starting and
+stopping of the containers using Docker Compose. See the project
+[`Dockerfile`][] for all of the build targets.
+
+<div align="center">
+  <img src="./docs/assets/docker-compose-architecture.png">
+</div>
+
+## ✅ Testing workflows
+
+_The testing suite includes linting, unit, integration and acceptance tests and
+is setup to be runnable locally or in a CI/CD environment. [ESLint][] is used
+for linting and [Jest][] is used for running tests._
+
+#### Linting
+
+The project uses the [`eslint-config-eloquence`][] Node rules and output is
+pretty printed using [`eslint-formatter-pretty`][].
 
 ```sh
-# Start external resources in a background process
-docker-compose up -d
-
-# Start service with nodemon reloads
-npm run start:dev
+npm run lint
 ```
 
-## Testing workflows
+#### Jest Watch mode
 
-Unit and integration tests are run with Jest. Unit tests are colocated with the
-files under test.
+While developing, the unit and integration tests can be run in watch mode for
+faster feedback. Running the watch command will start Jest in watch mode and
+rerun tests on change to `src`. Desktop notifications for changes in pass/fail
+status can be enabled by setting `ENABLE_JEST_NOTIFICATIONS=true` in your shell
+environment.
+
+```sh
+npm run test:watch
+```
+
+#### Unit tests
+
+Unit tests are colocated with their test target files in `src`. (By convention
+only the base modules are unit tested, larger modules that handle composition of
+functionality are tested with acceptance tests)
 
 ```sh
 npm run test:unit
 ```
 
-## 📝 Conventions
+#### Acceptance tests
 
-- Express server setup
-- 404 route handler
-- Custom error sanitization middleware
-- Jest configs
-- Dev nodemon configs
-- ESLint, Prettier and Commitizen configs
-- Centralized logger
-- Centralized configs managment
-- Async route handler wrapper
-- Manage Postgres migrations with the migration scripts and `node-pg-migrate`
-- Service resources (eg logger, db, configs) expose an async initialize fn that
-  can be called once during service initialization which will override the
-  resource defaults with environment appropriate ones. This lets us easily use
-  the resources in tests with the defaults, and set correct values in
-  production.
+Acceptance tests are located in `test/acceptance` and test the running service
+to validate that the API is following its contract. The helper files for
+acceptance tests are used to run db migrations against the test db and setup
+[`supertest`][] to target the right host and port.
 
-### Postgres
-
-**psql**
-
-Use Docker Compose to connect to the Postgres container and connect to the
-database, eg:
+⚠️ The acceptance tests are configured to run against the test containers by
+default, and requires they have been started with Compose. When running
+acceptance tests locally, the test service container must be restarted after
+file changes because it is running in a prod configuration and does not have
+automatic restarts.
 
 ```sh
-# Start terminal session in container
-docker-compose exec postgres bash
+# Use the start:test or start:all command to start the test containers before
+# running acceptance tests
+npm run test:acceptance
 
-# Connect to db with psql
-psql rad_db rad_user
+# Restart the test service process after file changes required
+docker-compose -f docker-compose.test.yml restart test-service
 ```
 
-**Migrations**
+#### CI/CD testing
 
-Migrations are managed with [node-pg-migrate][] and can be called with the npm
-`migrate` script, eg:
+In CI/CD environments Compose builds the `prod` and `tests-runner` build targets
+and runs the entire test suite in a contained environment. The
+[`docker-compose.tests-runner.yml`][] handles pointing the acceptance test
+helpers to the test containers from inside the Compose network.
+
+Note that if you run the CI test command locally the test containers are not
+stopped automatically.
 
 ```sh
-# Create a new migration
-npm run migrate create MIGRATION_NAME
-
-# Run
-DATABASE_URL=postgres://rad_user:rad_password@localhost:5432/rad_db npm run migrate up
+npm run test:ci
+npm run stop:ci
 ```
+
+## 👷‍♀️ Development workflows
+
+The `dev` build target in the [`Dockerfile`][] sets the image `CMD` to start the
+service with [Nodemon][] for automatic restarts. (See the
+[Debugging section](#-debugging-with-vscode) for details on attaching to the dev
+service).
+
+The dev and test containers can be run simultaneously for debugging and testing
+during development with the `start:all` command
+
+```sh
+npm run start[:all]
+```
+
+> ℹ️ _Exiting Compose_
+>
+> There is an issue with Compose where it will sometimes fail to exit gracefully
+> with a `^CERROR: Aborting.` message, when this happens you can stop the
+> containers with `npm run stop[:all]`
+
+## 🔬 Debugging with VSCode
+
+The `launch.json` config has tasks for debugging the development service, as
+well as the test suite or individual test files.
+
+- `Attach: Docker` - Attach a debugger to the running dev service
+- `Jest: Single File` - Run the current test file with the debugger attached
+- `Jest: Test Suite` - Run the entire test suite with the debugger attached
+
+## 📝 Service and project conventions guides
+
+- [Service error handling](./docs/error-handling.md)
+- [Postgres database](./docs/postgres.md)
 
 ## 🗺 Roadmap
 
-- [ ] Development Docker setup
-- [ ] Jest testing defaults
-- [ ] PM2 setup for running service in production
-- [ ] Route body and params validations
-- [ ] Custom error classes
-- [ ] Express production configuration
-- [ ] Setup proper logging with pino
+- [ ] Configuration initialization update to work with AWS SSM
+- [ ] Feature flagging and configuration live updating
+- [ ] Tracing integration with LightStep Tracing
+- [ ] Production cluster management with Docker Swarm
+- [ ] Load balancing and CORS management with an API gateway
+- [ ] Security review of Express and Docker configurations
+- [ ] Logging deep dive to improve debugging ability
 
 <!-- Links -->
-
-[node-pg-migrate]: https://github.com/salsita/node-pg-migrate
-[node-postgres]: https://node-postgres.com/
-[nodemon]: https://nodemon.io/
+<!-- prettier-ignore-start -->
+[ESLint]:https://eslint.org/
+[Jest]:https://jestjs.io/
+[Nodemon]:https://nodemon.io/
+[`Dockerfile`]:./Dockerfile
+[`docker-compose.tests-runner.yml`]:./docker-compose.tests-runner.yml
+[`eslint-config-eloquence`]:https://github.com/crystal-ball/eslint-config-eloquence
+[`eslint-formatter-pretty`]:https://github.com/sindresorhus/eslint-formatter-pretty
+[`node-pg-migrate`]:https://github.com/salsita/node-pg-migrate
+[`node-postgres`]:https://node-postgres.com/
+[`supertest`]:https://github.com/visionmedia/supertest
+<!-- prettier-ignore-end -->
