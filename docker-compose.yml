@@ -1,13 +1,52 @@
 version: '2.4'
 
-services:
+# Compose environment creates the postgres and service containers for local dev
 
+services:
   postgres:
     image: postgres:11.3
+    healthcheck:
+      test: pg_isready -h 127.0.0.1 -d rad_db -U rad_user
+      interval: 1s
+      start_period: 0s
     restart: always
-    ports:
-      - 5432:5432
     environment:
       POSTGRES_USER: rad_user
       POSTGRES_PASSWORD: rad_password
       POSTGRES_DB: rad_db
+    ports:
+      - '5432:5432'
+
+  node-service-prototype:
+    build:
+      context: .
+      target: dev
+    volumes:
+      # Bind project root for with a delegated flag to notify Docker that host
+      # writes don't need immediate consistency for speed
+      - .:/opt/service:delegated
+      # Mount the container node modules to an anonymous volume to prevent host
+      # node modules overwriting them from project root mount. (This is important
+      # to prevent architectural incompatibilitis for built binaries)
+      # Use a named volume in case we forget to clean the volume up and it's left
+      # hanging around
+      - node-service-prototype:/opt/service/node_modules
+    ports:
+      - '9000:9000'
+      - '9229:9229'
+    environment:
+      SERVICE_HOST: '0.0.0.0'
+      SERVICE_PORT: 9000
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: rad_user
+      POSTGRES_PASSWORD: rad_password
+      POSTGRES_DB: rad_db
+    # Use postgres healthcheck to ensure database is ready for connections
+    # before starting service
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  node-service-prototype:
