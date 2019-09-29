@@ -61,7 +61,7 @@ FROM base as tests-runner
 COPY --chown=node:node . .
 
 # Tests require devDependencies -> pull in from dev build stage
-COPY --from=dev /opt/service/node_modules /opt/service/node_modules
+COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
 
 # Testing time!
 CMD ["npm", "test"]
