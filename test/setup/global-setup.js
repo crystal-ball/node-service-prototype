@@ -3,7 +3,7 @@
 'use strict'
 
 const migrate = require('node-pg-migrate')
-const { service } = require('./resources')
+const { service } = require('../utils/resources')
 
 // Default configs set to work for running acceptance tests from local against
 // the Docker Compose containers

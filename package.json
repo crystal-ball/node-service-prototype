@@ -31,7 +31,7 @@
     "test": "npm run test:lint && npm run test:unit && npm run test:acceptance",
     "test:lint": "NODE_ENV=test eslint --format=pretty scripts src test",
     "test:unit": "TEST_SUITE=unit JEST_COLLECT_COVERAGE=1 jest src",
-    "test:acceptance": "TEST_SUITE=acceptance jest test/acceptance",
+    "test:acceptance": "TEST_SUITE=acceptance jest test",
     "test:watch": "NOTIFY=1 jest --watch src",
     "test:ci": "docker-compose -f docker-compose.test.yml -f docker-compose.tests-runner.yml run tests-runner",
     "stop:ci": "docker-compose -f docker-compose.test.yml -f docker-compose.tests-runner.yml stop",

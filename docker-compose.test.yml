@@ -47,4 +47,4 @@ services:
         condition: service_healthy
 
 volumes:
-  - test-node-service-prototype:
+  test-node-service-prototype:

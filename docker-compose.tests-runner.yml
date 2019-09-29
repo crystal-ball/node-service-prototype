@@ -21,8 +21,8 @@ services:
       POSTGRES_PASSWORD: test_password
       POSTGRES_DATABASE: test_db
     depends_on:
-      test-service:
+      test-node-service-prototype:
         condition: service_healthy
 
 volumes:
-  - tests-runner-node-service-prototype:
+  tests-runner-node-service-prototype:

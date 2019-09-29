@@ -19,6 +19,5 @@ module.exports = {
   coverageReporters: ['text-summary', 'lcov'],
   collectCoverageFrom: ['src/**/*.js'],
 
-  globalSetup:
-    TEST_SUITE === 'acceptance' ? './test/acceptance/utils/global-setup.js' : undefined,
+  globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
 }
