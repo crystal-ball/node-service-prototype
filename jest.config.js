@@ -1,5 +1,7 @@
 'use strict'
 
+const { ENABLE_JEST_NOTIFICATIONS, JEST_COLLECT_COVERAGE, TEST_SUITE } = process.env
+
 module.exports = {
   // Provides nice test output of what's being run
   verbose: true,
@@ -9,11 +11,14 @@ module.exports = {
 
   // OS notifications of test results is an opt in feature, enable by setting
   // a truthy env value in your shell environment
-  notify: Boolean(process.env.ENABLE_JEST_NOTIFICATIONS),
+  notify: Boolean(ENABLE_JEST_NOTIFICATIONS),
 
   // Collect test coverage of source files (excluding stories), report
   // text-summary for devs and lcov for reporting to Code Climate in CI/CD envs.
-  collectCoverage: true,
+  collectCoverage: Boolean(JEST_COLLECT_COVERAGE),
   coverageReporters: ['text-summary', 'lcov'],
   collectCoverageFrom: ['src/**/*.js'],
+
+  globalSetup:
+    TEST_SUITE === 'acceptance' ? './test/acceptance/utils/global-setup.js' : undefined,
 }

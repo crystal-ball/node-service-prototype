@@ -1,26 +1,48 @@
 'use strict'
 
-/**
- * Service instance environment configs
- */
-const configs = {
-  port: 9000,
-  pgUser: 'rad_user',
-  pgPassword: 'rad_password',
-  pgDatabase: 'rad_db',
+class Configs {
+  /**
+   * Service instance environment configs, all configs are defaulted to local
+   * development workflow values
+   */
+  configs = {
+    // The environment that the app is running in, separate from NODE_ENV which
+    // is used only to flip on performance optimizations
+    DEPLOY_ENVIRONMENT: 'local',
+    // JWT configs
+    JWT_SECRET: 'hecka-secret-jwt-secret',
+    // --- Service configs
+    SERVICE_HOST: '127.0.0.1',
+    SERVICE_PORT: 9000,
+    // --- DB configs
+    POSTGRES_DATABASE: 'rad_db',
+    POSTGRES_HOST: 'postgres',
+    POSTGRES_PASSWORD: 'rad_password',
+    POSTGRES_PORT: 5432,
+    POSTGRES_USER: 'rad_user',
+  }
+
+  /**
+   * Handle initalizing instance configs for environment
+   */
+  initializeConfigs = async () => {
+    // Overwrite default configs with environment values if set
+    Object.keys(this.configs).forEach(config => {
+      this.configs[config] = process.env[config] || this.configs[config]
+    })
+
+    return this.configs
+  }
+
+  /**
+   * Access the initialized configs
+   */
+  getConfigs = () => this.configs
 }
 
-/**
- * Handle initalizing instance configs for environment
- */
-const initializeConfigs = () => {
-  // Overwrite default configs with environment values if set
-  ;['PORT', 'PG_USER', 'PG_PASSWORD', 'PG_DATBASE'].forEach(config => {
-    const value = process.env[config]
-    if (value) configs[config] = value
-  })
+const configsSingleton = new Configs()
 
-  return configs
+module.exports = {
+  initializeConfigs: configsSingleton.initializeConfigs,
+  getConfigs: configsSingleton.getConfigs,
 }
-
-module.exports = { initializeConfigs, configs }

@@ -2,55 +2,64 @@
 
 const { Pool } = require('pg')
 
-const { configs } = require('../configs')
-const { logger } = require('../utils/logger')
+const { getConfigs } = require('../configs')
+const { logger } = require('../logger')
 
-let pool
+class DB {
+  pool = undefined
 
-/**
- * Handle creating connections pool to database
- */
-const initializeDb = () => {
-  pool = new Pool({
-    user: configs.pgUser,
-    password: configs.pgPassword,
-    database: configs.pgDatabase,
-  })
+  /**
+   * Handle creating connections pool to database
+   */
+  initializeDb = async () => {
+    const configs = getConfigs()
 
-  pool.on('error', err => {
-    logger.fatal('Unexpected error on idle client', err)
-    process.exit(1)
-  })
+    this.pool = new Pool({
+      host: configs.POSTGRES_HOST,
+      port: configs.POSTGRES_PORT,
+      user: configs.POSTGRES_USER,
+      password: configs.POSTGRES_PASSWORD,
+      database: configs.POSTGRES_DATABASE,
+    })
 
-  logger.info('Pool successfully created')
+    this.pool.on('error', err => {
+      logger.fatal('Unexpected error on idle client', err)
+      process.exit(1)
+    })
 
-  return {
-    close: async () => {
-      try {
-        await pool.end()
-        logger.info('Pool successfully closed')
-      } catch (err) {
-        logger.error('Failed to close pool', err)
-      }
-    },
+    try {
+      // Ensure that database is ready for connections
+      // TODO: add retries to this for just in case
+      const client = await this.pool.connect()
+      await client.query('SELECT NOW()')
+      client.release()
+    } catch (err) {
+      logger.error('💥 Database connection failure', err)
+    }
+
+    logger.info('Pool successfully created and ready for connections')
+
+    return {
+      close: async () => {
+        try {
+          await this.pool.end()
+          logger.info('Pool successfully closed')
+        } catch (err) {
+          logger.error('Failed to close pool', err)
+        }
+      },
+    }
   }
+
+  /**
+   * Access the initialized configs
+   */
+  getPool = () => this.pool
 }
 
-/**
- * Querys for all usernames
- */
-const selectUsernames = async () => {
-  try {
-    const result = await pool.query('SELECT * FROM users')
-    logger.info('Usernames', result.rows)
-    return result.rows.map(row => row.name)
-  } catch (err) {
-    logger.error('Failed querying usernames', err)
-    throw err
-  }
-}
+const dbSingleton = new DB()
 
 module.exports = {
-  initializeDb,
-  selectUsernames,
+  initializeDb: dbSingleton.initializeDb,
+  getPool: dbSingleton.getPool,
 }

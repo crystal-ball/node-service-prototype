@@ -2,12 +2,13 @@
 
 const express = require('express')
 const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 
 const { initializeConfigs } = require('./configs')
-const { initializeLogger } = require('./utils/logger')
+const { initializeLogger } = require('./logger')
 const { initializeDb } = require('./db')
 const { initializeRoutes } = require('./router')
-const { errorHandler } = require('./middleware/error-handler')
+const { initalizeErrorHandlers } = require('./middleware/error-handlers')
 
 /**
  * Service entry point will manage initializing service resources and then
@@ -28,17 +29,18 @@ const initializeService = async () => {
   // --- Initialize service middleware and routes ---
 
   app.use(helmet())
+  app.use(cookieParser())
   app.use(loggers.expressLogger)
 
   await initializeRoutes(app)
-  // Service error handler will ensure only sanitized error info is exposed
-  app.use(errorHandler)
+  await initalizeErrorHandlers(app)
 
   // --- Create service instance ---
 
+  const { SERVICE_HOST, SERVICE_PORT } = configs
   const server = app
-    .listen(configs.port, () => {
-      loggers.logger.info(`Service listening on http://localhost:${configs.port}`)
+    .listen(SERVICE_PORT, SERVICE_HOST, () => {
+      loggers.logger.info(`Service listening on http://localhost:${SERVICE_PORT}`)
     })
     .on('error', err => {
       // eslint-disable-next-line no-console
@@ -52,7 +54,8 @@ const initializeService = async () => {
     try {
       loggers.logger.info('Shutting down service...')
 
-      await Promise.all([db.close(), server.close()])
+      await server.close()
+      await db.close()
 
       loggers.logger.info('Server successfully shut down')
       process.exit(0)
@@ -63,6 +66,7 @@ const initializeService = async () => {
     }
   }
 
+  // Handle graceful exit codes from Docker with shutdown
   process.on('SIGTERM', gracefulShutdown)
   process.on('SIGINT', gracefulShutdown)
 
