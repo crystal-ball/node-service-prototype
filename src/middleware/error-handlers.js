@@ -8,7 +8,6 @@
  * @module
  */
 
-const { logger } = require('../logger')
 const { customErrorCodes } = require('../errors')
 
 /**
@@ -84,9 +83,7 @@ const unknownErrorHandler = (err, req, res, next) => {
   // error handler to close connection and fail request
   if (res.headersSent) return next(err)
 
-  // eslint-disable-next-line
-  err.message = `💥 Fatal Error\n${err.message}`
-  logger.error(err)
+  req.log.fatal({ err }, `💥 ${err.message}` || 'Fatal error 💥')
 
   return res.status(500).send({
     error: {

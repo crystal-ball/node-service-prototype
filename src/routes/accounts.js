@@ -56,6 +56,8 @@ const createAccount = {
         .cookie('session', sessionToken)
         .send({ data: { name, email } })
     } catch (err) {
+      // TODO: why is this error being caught and sanitized instead of using a
+      // custom error class like the login errors?
       if (err instanceof UniqueConstraintError) {
         // Unique constrain error on insert means that this email is already
         // associated with an account in the db, so we cannot create a new
@@ -66,8 +68,9 @@ const createAccount = {
             message: 'Account for email already exists',
           },
         })
+      } else {
+        throw err
       }
-      throw err
     }
   },
 }

@@ -1,7 +1,9 @@
 'use strict'
 
 const pino = require('pino')
-const expressPinoLogger = require('express-pino-logger')
+
+// http://getpino.io
+// https://github.com/pinojs/pino-pretty
 
 // ℹ️ Logging should only route to stdout/stderr per Docker best practices,
 // Transport to consumers should be handled separately
@@ -20,11 +22,13 @@ const expressPinoLogger = require('express-pino-logger')
 // 4. On response, the entire response is logged, with ability to mask sensitive
 //    response output
 
-const options = {}
+const options = {
+  name: 'node-service-prototype',
+}
 if (process.env.NODE_ENV !== 'production') {
   options.prettyPrint = {
     colorize: true,
-    translateTime: true,
+    translateTime: 'h:MM:ss',
   }
 }
 
@@ -34,7 +38,6 @@ const logger = pino(options)
  * Handle initializing logger for current service instance env
  */
 const initializeLogger = async () => ({
-  expressLogger: expressPinoLogger({ logger }),
   logger,
 })
 
