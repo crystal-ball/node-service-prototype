@@ -9,6 +9,7 @@ const { initializeLogger } = require('./logger')
 const { initializeDb } = require('./db')
 const { initializeRoutes } = require('./router')
 const { initalizeErrorHandlers } = require('./middleware/error-handlers')
+const { reqLogger } = require('./middleware/req-logger')
 
 /**
  * Service entry point will manage initializing service resources and then
@@ -30,7 +31,7 @@ const initializeService = async () => {
 
   app.use(helmet())
   app.use(cookieParser())
-  app.use(loggers.expressLogger)
+  app.use(reqLogger)
 
   await initializeRoutes(app)
   await initalizeErrorHandlers(app)

@@ -17,6 +17,9 @@ const ajv = new Ajv({ removeAdditional: true })
  * Uses validation schemas for a req body, headers and query params to perform
  * validations and reject inproper requests. Validation schemas should be
  * defined as a JSON schema.
+ *
+ * ?? Would it be helpful to add some logging about the body here? It has the
+ * danger of accidentally logging user info if it's forgetten about...
  */
 const requestValidation = ({ body, headers, queryParams }) => (req, res, next) => {
   const errors = []

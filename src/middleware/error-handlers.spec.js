@@ -1,8 +1,5 @@
 'use strict'
 
-jest.mock('../logger.js')
-const { logger } = require('../logger')
-
 const { initalizeErrorHandlers, unknownErrorHandler } = require('./error-handlers')
 
 const mockResponse = (status, send, options) => {
@@ -31,15 +28,18 @@ describe('Error Handler', () => {
 
   test('When an unknown error is handled, then only sanitized responses are sent', () => {
     const testError = new Error('Oh no')
-    const mockLogger = jest.spyOn(logger, 'error')
+    const mockFatal = jest.fn()
     const req = () => {}
+    req.log = {
+      fatal: mockFatal,
+    }
     const status = jest.fn()
     const send = jest.fn()
     const res = mockResponse(status, send, { headersSent: false })
 
     unknownErrorHandler(testError, req, res)
 
-    expect(mockLogger).toHaveBeenCalledWith(testError)
+    expect(mockFatal).toHaveBeenCalledWith({ err: testError }, '💥 Oh no')
     expect(status).toHaveBeenCalledWith(500)
     expect(send).toHaveBeenCalledWith({
       error: { code: 'INTERNAL_ERROR', message: 'Internal server error' },

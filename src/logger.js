@@ -1,7 +1,9 @@
 'use strict'
 
 const pino = require('pino')
-const expressPinoLogger = require('express-pino-logger')
+
+// http://getpino.io
+// https://github.com/pinojs/pino-pretty
 
 // ℹ️ Logging should only route to stdout/stderr per Docker best practices,
 // Transport to consumers should be handled separately
@@ -20,12 +22,43 @@ const expressPinoLogger = require('express-pino-logger')
 // 4. On response, the entire response is logged, with ability to mask sensitive
 //    response output
 
-const options = {}
+const options = {
+  name: 'node-service-prototype',
+  prettifier: null,
+}
+
+// Setup pretty printing for logs outside of production
 if (process.env.NODE_ENV !== 'production') {
-  options.prettyPrint = {
+  const prettyPrint = require('pino-pretty')
+  const prettifier = prettyPrint({
     colorize: true,
-    translateTime: true,
-  }
+    translateTime: 'h:MM:ss',
+    ignore: 'name,pid,hostname,req_id',
+  })
+
+  options.level = 20
+
+  // Pino will not pretty print if this config object isn't present ¯\_(ツ)_/¯
+  options.prettyPrint = {}
+  // The pino prettifier accepts a factory fn that is called with the values set
+  // in options.prettyPrint. The returned fn is called for log prettifying.
+  // Service wraps pino-pretty with some additional custom formatting (so that
+  // an entire custom prettifier isn't needed)
+  options.prettifier = () => rawLog =>
+    prettifier(rawLog).replace(
+      // Note that info and warn have an extra space from the ignored hostname/pid info
+      /INFO\s|WARN\s|DEBUG|ERROR|FATAL/,
+      matchedLevel =>
+        ({
+          // Remove extra space between INFO and :
+          'INFO ': 'INFO',
+          ERROR: '💥 ERROR',
+          // These emoji require two spaces to look correct
+          DEBUG: 'ℹ️  DEBUG',
+          'WARN ': '⚠️  WARN',
+          FATAL: '☢️  FATAL',
+        }[matchedLevel]),
+    )
 }
 
 const logger = pino(options)
@@ -34,7 +67,6 @@ const logger = pino(options)
  * Handle initializing logger for current service instance env
  */
 const initializeLogger = async () => ({
-  expressLogger: expressPinoLogger({ logger }),
   logger,
 })
 

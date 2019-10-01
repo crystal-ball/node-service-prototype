@@ -20,11 +20,11 @@ const insertAccount = async ({ email, name, hashedPassword }, logger) => {
       err.code === pgErrorsMap.unique_violation &&
       err.constraint === 'accounts_email_key'
     ) {
-      logger.info('Account already exists', { email })
+      logger.info({ email }, 'Account already exists')
       throw new UniqueConstraintError('Account already exists', { email })
     }
 
-    logger.error('Failed inserting new account', { email }, err)
+    logger.error({ email, err }, 'Failed inserting new account')
     throw err
   }
 }
@@ -39,7 +39,7 @@ const selectAccountById = async (id, logger) => {
     const result = await pool.query('SELECT * FROM accounts WHERE id = $1', [id])
     return result.rows[0]
   } catch (err) {
-    logger.error('Failed to lookup account by id', { id }, err)
+    logger.error({ id, err }, 'Failed to lookup account by id')
     throw err
   }
 }
@@ -54,7 +54,7 @@ const selectAccountByEmail = async (email, logger) => {
     const result = await pool.query('SELECT * FROM accounts WHERE email = $1', [email])
     return result.rows[0]
   } catch (err) {
-    logger.error('Failed to lookup account by id', { email }, err)
+    logger.error({ email, err }, 'Failed to lookup account by id')
     throw err
   }
 }
