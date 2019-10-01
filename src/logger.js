@@ -24,12 +24,16 @@ const pino = require('pino')
 
 const options = {
   name: 'node-service-prototype',
+  prettifier: null,
 }
+
 if (process.env.NODE_ENV !== 'production') {
   options.prettyPrint = {
     colorize: true,
     translateTime: 'h:MM:ss',
+    ignore: 'name,pid,hostname,req_id',
   }
+  options.prettifier = require('pino-pretty')
 }
 
 const logger = pino(options)
