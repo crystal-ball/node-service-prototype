@@ -1,8 +1,5 @@
 'use strict'
 
-jest.mock('../logger.js')
-const { logger } = require('../logger')
-
 const { initalizeErrorHandlers, unknownErrorHandler } = require('./error-handlers')
 
 const mockResponse = (status, send, options) => {
