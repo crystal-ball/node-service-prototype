@@ -29,7 +29,7 @@
   <a href="https://github.com/crystal-ball/node-service-prototype#workspaces/-projects-5b88b5c9af3c0a2186966767/board?repos=187376476">
     <img src="https://img.shields.io/badge/ZenHub-managed-5e60ba.svg" alt="ZenHub" valign="text-top" />
   </a>
-  <a href="./code-of-conduct.md">
+  <a href="./CODE_OF_CONDUCT.md">
     <img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0-de8cf2.svg" alt="Contributor Covenant" valign="text-top" />
   </a>
   <code>:integrations</code>
