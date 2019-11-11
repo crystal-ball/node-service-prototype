@@ -7,8 +7,8 @@
   <a href="https://travis-ci.com/crystal-ball/node-service-prototype">
     <img src="https://travis-ci.com/crystal-ball/node-service-prototype.svg?branch=master" alt="Build status" valign="text-top" />
   </a>
-  <a href="https://snyk.io/test/github/crystal-ball/crystal-ball.github.io?targetFile=package.json">
-    <img src="https://snyk.io/test/github/crystal-ball/crystal-ball.github.io/badge.svg?targetFile=package.json" alt="Known vulnerabilities" valign="text-top" />
+  <a href="https://snyk.io/test/github/crystal-ball/node-service-prototype?targetFile=package.json">
+    <img src="https://snyk.io/test/github/crystal-ball/node-service-prototype/badge.svg?targetFile=package.json" alt="Known vulnerabilities" valign="text-top" />
   </a>
   <a href="https://codeclimate.com/github/crystal-ball/node-service-prototype/test_coverage">
     <img src="https://api.codeclimate.com/v1/badges/01f7c050a41ab4459a31/test_coverage" alt="Test coverage" valign="text-top" />
