@@ -1,46 +1,56 @@
-<h1 align="right">
-  <img height=75 src="./docs/assets/readme-header.png" alt="Node.js service prototype">
-</h1>
+<div align="right">
+  <h1>
+    <img height=75 src="./docs/assets/readme-header.png" alt="Node.js service prototype">
+  </h1>
 
-<div align="center">
-<!-- prettier-ignore-start -->
-  <!-- <a href="https://www.npmjs.com/package/node-service-prototype" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/npm/v/node-service-prototype.svg" alt="current version" />
-  </a> -->
-  <a href="https://travis-ci.com/crystal-ball/node-service-prototype" target="_blank" rel="noopener noreferrer">
-    <img src="https://travis-ci.com/crystal-ball/node-service-prototype.svg?branch=master" alt="build status" />
+  <!-- prettier-ignore-start -->
+  <a href="https://travis-ci.com/crystal-ball/node-service-prototype">
+    <img src="https://travis-ci.com/crystal-ball/node-service-prototype.svg?branch=master" alt="Build status" valign="text-top" />
   </a>
-  <a href="https://codeclimate.com/github/crystal-ball/node-service-prototype/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/01f7c050a41ab4459a31/maintainability" />
+  <a href="https://snyk.io/test/github/crystal-ball/crystal-ball.github.io?targetFile=package.json">
+    <img src="https://snyk.io/test/github/crystal-ball/crystal-ball.github.io/badge.svg?targetFile=package.json" alt="Known vulnerabilities" valign="text-top" />
   </a>
   <a href="https://codeclimate.com/github/crystal-ball/node-service-prototype/test_coverage">
-    <img src="https://api.codeclimate.com/v1/badges/01f7c050a41ab4459a31/test_coverage" />
+    <img src="https://api.codeclimate.com/v1/badges/01f7c050a41ab4459a31/test_coverage" alt="Test coverage" valign="text-top" />
   </a>
-  <a href="https://renovatebot.com/" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/Renovate-enabled-32c3c2.svg" alt="dependencies managed by Renvoate" />
+  <a href="https://codeclimate.com/github/crystal-ball/node-service-prototype/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/01f7c050a41ab4459a31/maintainability" alt="Maintainability" valign="text-top" />
   </a>
-  <a href="https://github.com/crystal-ball/node-service-prototype#zenhub" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/Shipping_faster_with-ZenHub-5e60ba.svg?style=flat-square" alt="ZenHub" />
-  </a>
-  <a href="https://prettier.io/" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" alt="Prettier" />
-  </a>
-  <!-- <a href="https://semantic-release.gitbook.io/semantic-release/" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-semantic_release-e10079.svg" alt="managed by semantic release" />
-  </a> -->
-  <br />
-  <a href="https://github.com/crystal-ball" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/%F0%9F%94%AE%E2%9C%A8-contains_magic-D831D7.svg" alt="Contains magic" />
-  </a>
-  <a href="https://github.com/crystal-ball/node-service-prototype" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/%F0%9F%92%96%F0%9F%8C%88-full_of_love-F5499E.svg" alt="Full of love" />
-  </a>
-<!-- prettier-ignore-end -->
-</div>
+  <code>:status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>
 
-<p align="center">
-  <em>Prototypical Node.js service for Crystal Ball Projects</em>
-</p>
+  <br />
+
+  <a href="https://renovatebot.com/">
+    <img src="https://img.shields.io/badge/Renovate-enabled-32c3c2.svg" alt="Renovate" valign="text-top" />
+  </a>
+  <a href="https://commitizen.github.io/cz-cli/">
+    <img src="https://img.shields.io/badge/Commitizen-%E2%9C%93%20friendly-10e67b" alt="Commitizen friendly" valign="text-top" />
+  </a>
+  <a href="https://github.com/crystal-ball/node-service-prototype#workspaces/-projects-5b88b5c9af3c0a2186966767/board?repos=187376476">
+    <img src="https://img.shields.io/badge/ZenHub-managed-5e60ba.svg" alt="ZenHub" valign="text-top" />
+  </a>
+  <a href="./code-of-conduct.md">
+    <img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0-de8cf2.svg" alt="Contributor Covenant" valign="text-top" />
+  </a>
+  <code>:integrations</code>
+
+  <br />
+  <a href="https://github.com/crystal-ball">
+    <img src="https://img.shields.io/badge/%F0%9F%94%AE%E2%9C%A8-contains_magic-D831D7.svg" alt="Contains magic" valign="text-top" />
+  </a>
+  <a href="https://github.com/crystal-ball/crystal-ball.github.io">
+    <img src="https://img.shields.io/badge/%F0%9F%92%96%F0%9F%8C%88-full_of_love-F5499E.svg" alt="Full of love" valign="text-top" />
+  </a>
+  <code>:flair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>
+  <!-- prettier-ignore-end -->
+
+  <h1></h1>
+  <br />
+  <p align="center">
+    <em>Prototypical Node.js service for Crystal Ball Projects</em>
+  </p>
+  <br />
+</div>
 
 - [Features](#-project-features)
 - [Project install and setup](#-project-install-and-setup)
