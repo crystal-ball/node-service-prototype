@@ -35,7 +35,7 @@
     "test:watch": "NOTIFY=1 jest --watch src",
     "test:ci": "docker-compose -f docker-compose.test.yml -f docker-compose.tests-runner.yml run tests-runner",
     "stop:ci": "docker-compose -f docker-compose.test.yml -f docker-compose.tests-runner.yml stop",
-    "format": "prettier --write  '*.{js,json,md}' '**/*.{js,json,md,mdx,scss}'"
+    "format": "prettier --write '*.{js,json,md}' '**/*.{js,json,md,mdx,scss}'"
   },
   "dependencies": {
     "ajv": "6.10.2",
