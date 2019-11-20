@@ -53,11 +53,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.7.0",
-    "@crystal-ball/commitizen-base": "2.1.0",
+    "@crystal-ball/commitizen-base": "2.3.0",
     "@crystal-ball/prettier-base": "1.6.0",
     "@types/jest": "24.0.23",
-    "eslint-config-eloquence": "12.10.1",
-    "husky": "3.0.9",
+    "eslint-config-eloquence": "12.11.0",
+    "husky": "3.1.0",
     "jest": "24.9.0",
     "nodemon": "1.19.4",
     "supertest": "4.0.2"
