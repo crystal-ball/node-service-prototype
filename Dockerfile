@@ -31,6 +31,11 @@ ENV NODE_ENV production
 RUN mkdir /opt/service && chown node:node /opt/service
 WORKDIR /opt/service
 
+# Install native packages needed by node-gyp to build argon
+# Note this leaves behind deps, `apk del .gyp` would delete, or a build stage
+# https://github.com/nodejs/docker-node/issues/282#issuecomment-356014942
+RUN apk update && apk add --no-cache --virtual .gyp make gcc g++ python
+
 # Switch to unprivileged user provided by official Node image for security best
 # practices.
 USER node
@@ -40,7 +45,7 @@ USER node
 COPY --chown=node:node package*.json ./
 RUN npm ci && npm cache clean --force
 
-# --- 2⃣ Dev ---
+# --- 2️⃣ Dev ---
 # Stage installs the rest of the dev dependencies for local and testing
 # workflows. Project files *are not* copied in as they're bind-mount'ed
 FROM base as dev
