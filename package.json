@@ -39,17 +39,17 @@
   },
   "dependencies": {
     "ajv": "6.10.2",
-    "argon2": "0.24.1",
+    "argon2": "0.25.1",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.4",
     "express": "4.17.1",
-    "helmet": "3.21.1",
+    "helmet": "3.21.2",
     "jsonwebtoken": "8.5.1",
-    "nanoid": "2.1.1",
+    "nanoid": "2.1.7",
     "node-pg-migrate": "3.23.3",
-    "pg": "7.12.1",
-    "pino": "5.13.4",
-    "pino-pretty": "3.3.0"
+    "pg": "7.14.0",
+    "pino": "5.14.0",
+    "pino-pretty": "3.4.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.7.0",
