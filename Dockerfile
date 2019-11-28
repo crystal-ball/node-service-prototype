@@ -1,7 +1,7 @@
 # --- 1️⃣ Base setup ---
 # Setup base image, workdir and production dependencies used in all stages
 
-FROM node:12.13.0-alpine as base
+FROM node:12.13.1-alpine as base
 
 # Dynamic label values should be set with env variables at build time
 ARG CREATED_DATE=not-set
