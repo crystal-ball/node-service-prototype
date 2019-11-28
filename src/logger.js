@@ -1,7 +1,5 @@
-'use strict'
-
-const pino = require('pino')
-const prettyPrint = require('pino-pretty')
+import pino from 'pino'
+import prettyPrint from 'pino-pretty'
 
 // http://getpino.io
 // https://github.com/pinojs/pino-pretty
@@ -61,13 +59,11 @@ if (process.env.NODE_ENV !== 'production') {
     )
 }
 
-const logger = pino(options)
+export const logger = pino(options)
 
 /**
  * Handle initializing logger for current service instance env
  */
-const initializeLogger = async () => ({
-  logger,
-})
-
-module.exports = { initializeLogger, logger }
+export async function initializeLogger() {
+  return { logger }
+}

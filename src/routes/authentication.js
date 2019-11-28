@@ -1,14 +1,12 @@
-'use strict'
-
 /**
  * Authentication routes manage the user's authentication session including
  * logging in and out. (See accounts routes for account CRUD management)
  * @module
  */
 
-const { signJWT, validatePassword } = require('../utils')
-const { selectAccountByEmail } = require('../db/accounts')
-const { UnauthorizedError } = require('../errors')
+import { signJWT, validatePassword } from '../utils/index.js'
+import { selectAccountByEmail } from '../db/accounts.js'
+import { UnauthorizedError } from '../errors.js'
 
 /**
  * POST - /auth/login { email: String, password: String }
@@ -20,7 +18,7 @@ const { UnauthorizedError } = require('../errors')
  * - Successful logins will create a JWT session cookie
  * - Failed logins of missing email or wrong password will return a 401
  */
-const loginAccount = {
+export const loginAccount = {
   schema: {
     body: {
       $id: 'account-login-body',
@@ -60,7 +58,7 @@ const loginAccount = {
   },
 }
 
-const logoutAccount = {
+export const logoutAccount = {
   handler: async (req, res) => {
     res
       .status(200)
@@ -68,5 +66,3 @@ const logoutAccount = {
       .send({ data: { success: true } })
   },
 }
-
-module.exports = { loginAccount, logoutAccount }

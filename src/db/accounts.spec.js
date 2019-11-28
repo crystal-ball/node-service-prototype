@@ -1,11 +1,10 @@
-'use strict'
+/* eslint-disable import/first, import/no-namespace */
 
 jest.mock('./index')
-const db = require('./index')
+import * as db from './index'
 
-const { UniqueConstraintError } = require('../errors')
-
-const { insertAccount } = require('./accounts')
+import { UniqueConstraintError } from '../errors.js'
+import { insertAccount } from './accounts'
 
 describe('Accounts DB interface', () => {
   test('When insertAccount is called with account details, then new user account is inserted', async () => {

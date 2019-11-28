@@ -1,15 +1,13 @@
-'use strict'
+import express from 'express'
+import helmet from 'helmet'
+import cookieParser from 'cookie-parser'
 
-const express = require('express')
-const helmet = require('helmet')
-const cookieParser = require('cookie-parser')
-
-const { initializeConfigs } = require('./configs')
-const { initializeLogger } = require('./logger')
-const { initializeDb } = require('./db')
-const { initializeRoutes } = require('./router')
-const { initalizeErrorHandlers } = require('./middleware/error-handlers')
-const { reqLogger } = require('./middleware/req-logger')
+import { initializeConfigs } from './configs.js'
+import { initializeLogger } from './logger.js'
+import { initializeDb } from './db/index.js'
+import { initializeRoutes } from './router.js'
+import { initalizeErrorHandlers } from './middleware/error-handlers.js'
+import { reqLogger } from './middleware/req-logger.js'
 
 /**
  * Service entry point will manage initializing service resources and then

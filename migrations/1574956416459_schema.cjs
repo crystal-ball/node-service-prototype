@@ -1,7 +1,3 @@
-/* eslint-disable camelcase */
-
-'use strict'
-
 exports.shorthands = undefined
 
 exports.up = pgm => {
@@ -37,4 +33,4 @@ exports.up = pgm => {
   })
 }
 
-exports.down = () => {}
+exports.down = pgm => {}

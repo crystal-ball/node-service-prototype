@@ -3,7 +3,10 @@
 module.exports = {
   root: true,
   extends: 'eloquence/node',
+  parserOptions: {
+    sourceType: 'module',
+  },
   rules: {
-    'require-await': 0,
+    'import/extensions': ['error', 'ignorePackages'],
   },
 }

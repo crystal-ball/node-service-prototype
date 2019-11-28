@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
 
-'use strict'
-
 /**
  * Handle running migrations for the environment using env vars set by Docker
  * Compose, eg:
@@ -11,7 +9,7 @@
  * 3. npm run migrate:up
  */
 
-const migrate = require('node-pg-migrate')
+import migrate from 'node-pg-migrate'
 
 const host = process.env.POSTGRES_HOST
 const database = process.env.POSTGRES_DB
@@ -23,6 +21,7 @@ const performMigrations = async () => {
   console.log('Running DB migrations ...')
   try {
     await migrate({
+      checkOrder: true,
       databaseUrl: `postgres://${user}:${password}@${host}:${port}/${database}`,
       dir: 'migrations',
       direction: 'up',

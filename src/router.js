@@ -1,19 +1,17 @@
-'use strict'
+import bodyParser from 'body-parser'
 
-const bodyParser = require('body-parser')
-
-const { asyncHandler } = require('./routes/async-handler')
-const { createAccount, getAccount } = require('./routes/accounts')
-const { loginAccount, logoutAccount } = require('./routes/authentication')
-const { requestValidation } = require('./middleware/validation')
-const { verifySession } = require('./middleware/verify-jwt')
+import { asyncHandler } from './routes/async-handler.js'
+import { createAccount, getAccount } from './routes/accounts.js'
+import { loginAccount, logoutAccount } from './routes/authentication.js'
+import { requestValidation } from './middleware/validation.js'
+import { verifySession } from './middleware/verify-jwt.js'
 
 const jsonParser = bodyParser.json()
 
 /**
  * Handle mounting all routes to app
  */
-const initializeRoutes = app => {
+export function initializeRoutes(app) {
   app.get('/healthcheck', (req, res) => {
     res.send({ data: '🔮✨ MAGIC' })
   })
@@ -41,5 +39,3 @@ const initializeRoutes = app => {
     res.status(404).send({ error: { code: 'NOT_FOUND', message: 'Route not found' } })
   })
 }
-
-module.exports = { initializeRoutes }

@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict'
-
 /**
  * Defines reuseable custom error classes for throwing descriptive/helpful
  * errors.
@@ -12,13 +10,13 @@
 // Ref: https://www.postgresql.org/docs/current/errcodes-appendix.html
 // ??? https://www.npmjs.com/package/pg-error-constants
 
-const pgErrorsMap = {
+export const pgErrorsMap = {
   unique_violation: '23505',
 }
 
 // --- Custom error codes ---
 
-const customErrorCodes = {
+export const customErrorCodes = {
   unauthorized: 'unauthorized',
   forbidden: 'forbidden',
   uniqueConstraint: 'unique_constraint',
@@ -42,7 +40,7 @@ const customErrorConstructor = (error, { code, name, details }) => {
   /* eslint-enable no-param-reassign */
 }
 
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
   constructor(message, ...details) {
     super(message || 'Insufficient user permissions')
     customErrorConstructor(this, {
@@ -53,7 +51,7 @@ class ForbiddenError extends Error {
   }
 }
 
-class UnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
   constructor(message, ...details) {
     super(message || 'User not authorized')
     customErrorConstructor(this, {
@@ -64,7 +62,7 @@ class UnauthorizedError extends Error {
   }
 }
 
-class UniqueConstraintError extends Error {
+export class UniqueConstraintError extends Error {
   constructor(message, ...details) {
     super(message || 'Query failed due to unique constraint')
     customErrorConstructor(this, {
@@ -73,12 +71,4 @@ class UniqueConstraintError extends Error {
       details,
     })
   }
-}
-
-module.exports = {
-  ForbiddenError,
-  UnauthorizedError,
-  UniqueConstraintError,
-  customErrorCodes,
-  pgErrorsMap,
 }

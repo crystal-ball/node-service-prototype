@@ -1,5 +1,3 @@
-'use strict'
-
 class Configs {
   /**
    * Service instance environment configs, all configs are defaulted to local
@@ -23,26 +21,32 @@ class Configs {
   }
 
   /**
-   * Handle initalizing instance configs for environment
-   */
-  initializeConfigs = async () => {
-    // Overwrite default configs with environment values if set
-    Object.keys(this.configs).forEach(config => {
-      this.configs[config] = process.env[config] || this.configs[config]
-    })
-
-    return this.configs
-  }
-
-  /**
    * Access the initialized configs
    */
   getConfigs = () => this.configs
+
+  /**
+   * Updates stored configs
+   */
+  setConfig = (config, value) => {
+    this.configs[config] = value
+  }
 }
 
 const configsSingleton = new Configs()
 
-module.exports = {
-  initializeConfigs: configsSingleton.initializeConfigs,
-  getConfigs: configsSingleton.getConfigs,
+/**
+ * Handle initalizing instance configs for environment
+ */
+export async function initializeConfigs() {
+  const defaultConfigs = configsSingleton.getConfigs()
+
+  // Overwrite default configs with environment values if set
+  Object.keys(defaultConfigs).forEach(config => {
+    configsSingleton.setConfig(config, process.env[config] || defaultConfigs[config])
+  })
+
+  return configsSingleton.getConfigs()
 }
+
+export const { getConfigs } = configsSingleton

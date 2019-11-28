@@ -1,11 +1,9 @@
 /* eslint-disable camelcase */
 
-'use strict'
+import { getPool } from './index.js'
+import { UniqueConstraintError, pgErrorsMap } from '../errors.js'
 
-const { getPool } = require('./index')
-const { UniqueConstraintError, pgErrorsMap } = require('../errors')
-
-const insertAccount = async ({ email, name, hashedPassword }, logger) => {
+export async function insertAccount({ email, name, hashedPassword }, logger) {
   const pool = getPool()
   const normalizedEmail = email.toLocaleLowerCase()
 
@@ -32,7 +30,7 @@ const insertAccount = async ({ email, name, hashedPassword }, logger) => {
 /**
  * Lookup an account by id
  */
-const selectAccountById = async (id, logger) => {
+export async function selectAccountById(id, logger) {
   const pool = getPool()
 
   try {
@@ -47,7 +45,7 @@ const selectAccountById = async (id, logger) => {
 /**
  * Lookup an account by email
  */
-const selectAccountByEmail = async (email, logger) => {
+export async function selectAccountByEmail(email, logger) {
   const pool = getPool()
 
   try {
@@ -58,5 +56,3 @@ const selectAccountByEmail = async (email, logger) => {
     throw err
   }
 }
-
-module.exports = { insertAccount, selectAccountByEmail, selectAccountById }
