@@ -15,7 +15,7 @@ const verifySession = async (req, res, next) => {
 
   try {
     const token = await verifyJWT(session)
-    req.account = { id: token.accountId }
+    req.account = { id: token.accountId } // eslint-disable-line require-atomic-updates
     return next()
   } catch (err) {
     return next(new ForbiddenError('Invalid session token'))
