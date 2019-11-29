@@ -1,7 +1,5 @@
-/* eslint-disable camelcase */
-
-import { getPool } from './index.js'
-import { UniqueConstraintError, pgErrorsMap } from '../errors.js'
+import { getPool } from './index.mjs'
+import { UniqueConstraintError, pgErrorsMap } from '../errors.mjs'
 
 export async function insertAccount({ email, name, hashedPassword }, logger) {
   const pool = getPool()

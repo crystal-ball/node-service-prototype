@@ -1,5 +1,3 @@
-'use strict'
-
 const { ENABLE_JEST_NOTIFICATIONS, JEST_COLLECT_COVERAGE, TEST_SUITE } = process.env
 
 module.exports = {
@@ -13,11 +11,16 @@ module.exports = {
   // a truthy env value in your shell environment
   notify: Boolean(ENABLE_JEST_NOTIFICATIONS),
 
+  // Include .mjs in Babel transforms until Jest supports ESModules
+  transform: {
+    '^.+\\.mjs$': 'babel-jest',
+  },
+
   // Collect test coverage of source files (excluding stories), report
   // text-summary for devs and lcov for reporting to Code Climate in CI/CD envs.
   collectCoverage: Boolean(JEST_COLLECT_COVERAGE),
   coverageReporters: ['text-summary', 'lcov'],
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.mjs'],
 
   globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
 }

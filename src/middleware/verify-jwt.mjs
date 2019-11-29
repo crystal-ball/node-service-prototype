@@ -1,5 +1,5 @@
-import { ForbiddenError, UnauthorizedError } from '../errors.js'
-import { verifyJWT } from '../utils/index.js'
+import { ForbiddenError, UnauthorizedError } from '../errors.mjs'
+import { verifyJWT } from '../utils/index.mjs'
 
 /**
  * Middleware should pick the jwt cookie from a req and verify it

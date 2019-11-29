@@ -9,7 +9,7 @@
  * 3. npm run migrate:up
  */
 
-import migrate from 'node-pg-migrate'
+const migrate = require('node-pg-migrate')
 
 const host = process.env.POSTGRES_HOST
 const database = process.env.POSTGRES_DB

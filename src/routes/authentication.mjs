@@ -4,9 +4,9 @@
  * @module
  */
 
-import { signJWT, validatePassword } from '../utils/index.js'
-import { selectAccountByEmail } from '../db/accounts.js'
-import { UnauthorizedError } from '../errors.js'
+import { signJWT, validatePassword } from '../utils/index.mjs'
+import { selectAccountByEmail } from '../db/accounts.mjs'
+import { UnauthorizedError } from '../errors.mjs'
 
 /**
  * POST - /auth/login { email: String, password: String }

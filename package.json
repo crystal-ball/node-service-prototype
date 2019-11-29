@@ -2,8 +2,8 @@
   "name": "@crystal-ball/node-service-prototype",
   "version": "0.0.0",
   "description": "Prototypical Node.js service",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "src/index.mjs",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/crystal-ball/node-service-prototype.git"

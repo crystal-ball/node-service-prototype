@@ -1,6 +1,6 @@
-import { insertAccount, selectAccountById } from '../db/accounts.js'
-import { generatePasswordHash, signJWT } from '../utils/index.js'
-import { UniqueConstraintError } from '../errors.js'
+import { insertAccount, selectAccountById } from '../db/accounts.mjs'
+import { generatePasswordHash, signJWT } from '../utils/index.mjs'
+import { UniqueConstraintError } from '../errors.mjs'
 
 /**
  * POST - /account/create { email: String, name: String, password: String }

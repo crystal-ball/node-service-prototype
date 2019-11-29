@@ -6,7 +6,7 @@
  * @module
  */
 
-import { customErrorCodes } from '../errors.js'
+import { customErrorCodes } from '../errors.mjs'
 
 /**
  * Handle known service errors intentionally thrown in the code with a sanitized

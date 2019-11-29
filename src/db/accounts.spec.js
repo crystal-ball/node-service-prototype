@@ -1,10 +1,10 @@
 /* eslint-disable import/first, import/no-namespace */
 
-jest.mock('./index')
-import * as db from './index'
+jest.mock('./index.mjs')
+const db = require('./index.mjs')
 
-import { UniqueConstraintError } from '../errors.js'
-import { insertAccount } from './accounts'
+const { UniqueConstraintError } = require('../errors.mjs')
+const { insertAccount } = require('./accounts.mjs')
 
 describe('Accounts DB interface', () => {
   test('When insertAccount is called with account details, then new user account is inserted', async () => {

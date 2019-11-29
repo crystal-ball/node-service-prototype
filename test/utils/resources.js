@@ -1,4 +1,4 @@
-import supertest from 'supertest'
+const supertest = require('supertest')
 
 // Default configs set to work for running acceptance tests from local against
 // the Docker Compose containers
@@ -8,20 +8,20 @@ const port = process.env.SERVICE_PORT || 9001
 /**
  * Test service
  */
-export const service = supertest(`${serviceHost}:${port}`)
+const service = supertest(`${serviceHost}:${port}`)
 
 /**
  * Create a uniqueish email to allow multiple test runs not to create unique
  * email constraint errors
  */
-export function createEmail() {
+function createEmail() {
   return `${Math.floor(Math.random() * 100000)}.tester@gmail.com`
 }
 
 /**
  * Create a test user
  */
-export async function createAccount({
+async function createAccount({
   name = 'Rad Tester',
   email = createEmail(),
   password = 'hecka rad secret tester',
@@ -34,4 +34,10 @@ export async function createAccount({
   const sessionCookie = res.headers['set-cookie'][0]
 
   return { name, email, password, sessionCookie }
+}
+
+module.exports = {
+  service,
+  createAccount,
+  createEmail,
 }

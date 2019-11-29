@@ -1,7 +1,7 @@
 import pg from 'pg'
 
-import { getConfigs } from '../configs.js'
-import { logger } from '../logger.js'
+import { getConfigs } from '../configs.mjs'
+import { logger } from '../logger.mjs'
 
 const { Pool } = pg
 

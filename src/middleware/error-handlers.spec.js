@@ -1,4 +1,4 @@
-import { initalizeErrorHandlers, unknownErrorHandler } from './error-handlers'
+const { initalizeErrorHandlers, unknownErrorHandler } = require('./error-handlers.mjs')
 
 const mockResponse = (status, send, options) => {
   const res = { ...options }

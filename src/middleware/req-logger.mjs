@@ -12,7 +12,7 @@
 import pino from 'pino'
 import nanoid from 'nanoid'
 
-import { logger } from '../logger.js'
+import { logger } from '../logger.mjs'
 
 const logMeta = Symbol('logMeta')
 

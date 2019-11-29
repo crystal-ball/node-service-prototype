@@ -1,4 +1,4 @@
-import { createAccount, service } from './utils/resources'
+const { createAccount, service } = require('./utils/resources')
 
 describe('Acceptance - Authentication Routes', () => {
   test('When correct credentials are sent to /auth/login, then session cookie is returned', async () => {

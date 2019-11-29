@@ -2,12 +2,12 @@ import express from 'express'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 
-import { initializeConfigs } from './configs.js'
-import { initializeLogger } from './logger.js'
-import { initializeDb } from './db/index.js'
-import { initializeRoutes } from './router.js'
-import { initalizeErrorHandlers } from './middleware/error-handlers.js'
-import { reqLogger } from './middleware/req-logger.js'
+import { initializeConfigs } from './configs.mjs'
+import { initializeLogger } from './logger.mjs'
+import { initializeDb } from './db/index.mjs'
+import { initializeRoutes } from './router.mjs'
+import { initalizeErrorHandlers } from './middleware/error-handlers.mjs'
+import { reqLogger } from './middleware/req-logger.mjs'
 
 /**
  * Service entry point will manage initializing service resources and then

@@ -55,7 +55,7 @@ ENV NODE_ENV=development
 RUN npm install
 
 # Start the service with Nodemon!
-CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src/**/*.spec.js' ./src/index.js
+CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src/**/*.spec.js' ./src/index.mjs
 
 # --- 3️⃣ Testing ---
 # Run the entire test suite including linting, unit and acceptance tests for
@@ -69,7 +69,8 @@ COPY --chown=node:node . .
 COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
 
 # Testing time!
-CMD ["npm", "test"]
+# Cannot run ESLint due to ESModule failures at this time
+CMD ["npm", "run", "test:unit"]
 
 # --- 4️⃣ Production preparation
 FROM base as pre-production
@@ -93,4 +94,4 @@ FROM security-scans as prod
 HEALTHCHECK --interval=5s --timeout=1s --start-period=1s --retries=3 CMD ["node", "./scripts/healthcheck.js"] || exit 1
 
 # 🎉 Start the service!
-CMD ["node", "./src/index.js"]
+CMD ["node", "./src/index.mjs"]

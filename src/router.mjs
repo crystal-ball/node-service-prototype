@@ -1,10 +1,10 @@
 import bodyParser from 'body-parser'
 
-import { asyncHandler } from './routes/async-handler.js'
-import { createAccount, getAccount } from './routes/accounts.js'
-import { loginAccount, logoutAccount } from './routes/authentication.js'
-import { requestValidation } from './middleware/validation.js'
-import { verifySession } from './middleware/verify-jwt.js'
+import { asyncHandler } from './routes/async-handler.mjs'
+import { createAccount, getAccount } from './routes/accounts.mjs'
+import { loginAccount, logoutAccount } from './routes/authentication.mjs'
+import { requestValidation } from './middleware/validation.mjs'
+import { verifySession } from './middleware/verify-jwt.mjs'
 
 const jsonParser = bodyParser.json()
 

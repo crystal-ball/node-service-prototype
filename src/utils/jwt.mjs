@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import util from 'util'
 
-import { getConfigs } from '../configs.js'
+import { getConfigs } from '../configs.mjs'
 
 const asyncSign = util.promisify(jwt.sign)
 const asyncVerify = util.promisify(jwt.verify)
