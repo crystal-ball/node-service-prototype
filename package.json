@@ -46,7 +46,7 @@
     "helmet": "3.21.2",
     "jsonwebtoken": "8.5.1",
     "nanoid": "2.1.7",
-    "node-pg-migrate": "3.23.3",
+    "node-pg-migrate": "4.2.0",
     "pg": "7.14.0",
     "pino": "5.14.0",
     "pino-pretty": "3.4.0"
