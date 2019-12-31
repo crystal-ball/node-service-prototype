@@ -31,6 +31,14 @@ ENV NODE_ENV production
 RUN mkdir /opt/service && chown node:node /opt/service
 WORKDIR /opt/service
 
+COPY --chown=node:node package*.json ./
+
+# --- 2️⃣ Dependencies ---
+# Stage installs the production dependencies (and native binaries needed to
+# build them) Install is run as a separate stage to easily exclude build
+# binaries in final production image
+FROM base as deps-builder
+
 # Install native packages needed by node-gyp to build argon
 # Note this leaves behind deps, `apk del .gyp` would delete, or a build stage
 # https://github.com/nodejs/docker-node/issues/282#issuecomment-356014942
@@ -40,27 +48,29 @@ RUN apk update && apk add --no-cache --virtual .gyp make gcc g++ python
 # practices.
 USER node
 
-# Install production dependencies into base image
-# Clean npm cache after install to minimize image size
-COPY --chown=node:node package*.json ./
-RUN npm ci && npm cache clean --force
+# Install production dependencies
+RUN npm ci
 
-# --- 2️⃣ Dev ---
+# --- 3️⃣ Dev ---
 # Stage installs the rest of the dev dependencies for local and testing
 # workflows. Project files *are not* copied in as they're bind-mount'ed
 FROM base as dev
+USER node
 
 ENV NODE_ENV=development
 
+# Copy in production dependencies and install remaining dev deps
+COPY --from=deps-builder --chown=node:node /opt/service/node_modules /opt/service/node_modules
 RUN npm install
 
 # Start the service with Nodemon!
 CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src/**/*.spec.js' ./src/index.js
 
-# --- 3️⃣ Testing ---
+# --- 4️⃣ Testing ---
 # Run the entire test suite including linting, unit and acceptance tests for
 # service as part of CI/CD using Compose
 FROM base as tests-runner
+USER node
 
 # Tests require all resources copied in to workspace
 COPY --chown=node:node . .
@@ -71,20 +81,26 @@ COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_mo
 # Testing time!
 CMD ["npm", "test"]
 
-# --- 4️⃣ Production preparation
+# --- 5️⃣ Production preparation
 FROM base as pre-production
+USER node
+
+# Copy prod dependencies only (multi-stage used to exclude node-gyp native modules)
+COPY --from=deps-builder --chown=node:node /opt/service/node_modules /opt/service/node_modules
 
 # Copy files needed to run production service
-COPY --chown=node:node ["./migrations", "./scripts", "./src", "./LICENSE.md", "./"]
+COPY --chown=node:node migrations migrations
+COPY --chown=node:node scripts scripts
+COPY --chown=node:node src src
 
-# --- 5️⃣ Security scanning
+# --- 6️⃣ Security scanning
 FROM pre-production as security-scans
 
 # NPM audit dependencies to check for vulnerabilities (but just warn on fail b/c
 # there's almost always vulnerabilities 😢)
 RUN npm audit || echo "⚠️ Vulnerabilities found"
 
-# --- 6️⃣ Production
+# --- 7️⃣ Production
 # Default stage that will be run if you build without a target, start service
 # directly with Node to ensure shutdown signals are received properly
 FROM security-scans as prod
