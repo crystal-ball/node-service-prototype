@@ -12,7 +12,7 @@ class Configs {
     // JWT configs
     JWT_SECRET: 'hecka-secret-jwt-secret',
     // --- Service configs
-    SERVICE_HOST: '127.0.0.1',
+    SERVICE_HOST: '0.0.0.0',
     SERVICE_PORT: 9000,
     // --- DB configs
     POSTGRES_DATABASE: 'rad_db',

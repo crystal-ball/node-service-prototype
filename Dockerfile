@@ -75,7 +75,9 @@ CMD ["npm", "test"]
 FROM base as pre-production
 
 # Copy files needed to run production service
-COPY --chown=node:node ["./migrations", "./scripts", "./src", "./LICENSE.md", "./"]
+COPY --chown=node:node migrations migrations
+COPY --chown=node:node scripts scripts
+COPY --chown=node:node src src
 
 # --- 5️⃣ Security scanning
 FROM pre-production as security-scans
