@@ -55,7 +55,7 @@
     "@babel/plugin-proposal-class-properties": "7.7.4",
     "@crystal-ball/commitizen-base": "2.3.0",
     "@crystal-ball/prettier-base": "1.6.0",
-    "@types/jest": "24.0.24",
+    "@types/jest": "24.0.25",
     "eslint-config-eloquence": "12.16.0",
     "husky": "3.1.0",
     "jest": "24.9.0",
