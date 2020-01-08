@@ -45,8 +45,8 @@
     "express": "4.17.1",
     "helmet": "3.21.2",
     "jsonwebtoken": "8.5.1",
-    "nanoid": "2.1.8",
-    "node-pg-migrate": "4.2.0",
+    "nanoid": "2.1.9",
+    "node-pg-migrate": "4.2.1",
     "pg": "7.17.0",
     "pino": "5.15.0",
     "pino-pretty": "3.5.0"
