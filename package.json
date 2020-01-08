@@ -57,7 +57,7 @@
     "@crystal-ball/prettier-base": "1.6.0",
     "@types/jest": "24.0.25",
     "eslint-config-eloquence": "12.16.0",
-    "husky": "3.1.0",
+    "husky": "4.0.0",
     "jest": "24.9.0",
     "nodemon": "2.0.2",
     "supertest": "4.0.2"
