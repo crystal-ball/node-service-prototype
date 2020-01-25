@@ -19,5 +19,8 @@ module.exports = {
   coverageReporters: ['text-summary', 'lcov'],
   collectCoverageFrom: ['src/**/*.js'],
 
+  // Disable Babel transforms, Node has full support for all lanugage features used
+  transform: {},
+
   globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
 }
