@@ -1,6 +1,4 @@
-'use strict'
-
-const { createAccount, service } = require('./utils/resources')
+import { createAccount, service } from './utils/resources'
 
 describe('Acceptance - Authentication Routes', () => {
   test('When correct credentials are sent to /auth/login, then session cookie is returned', async () => {

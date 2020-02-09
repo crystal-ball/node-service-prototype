@@ -3,7 +3,12 @@
 module.exports = {
   root: true,
   extends: 'eloquence/node',
-  rules: {
-    'require-await': 0,
-  },
+  overrides: [
+    {
+      files: ['**/*.spec.js'],
+      rules: {
+        'import/first': 'off',
+      },
+    },
+  ],
 }
