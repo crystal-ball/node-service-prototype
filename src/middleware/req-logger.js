@@ -1,5 +1,3 @@
-/* eslint-disable max-params */
-
 'use strict'
 
 /**

@@ -1,6 +1,4 @@
-'use strict'
-
-const { service, createAccount, createEmail } = require('./utils/resources')
+import { createAccount, createEmail, service } from './utils/resources'
 
 describe('Acceptance - Accounts Routes', () => {
   test('When a valid payload is sent to /account/create, then an account is created', async () => {
@@ -98,7 +96,7 @@ describe('Acceptance - Accounts Routes', () => {
           {
             dataPath: '.email',
             keyword: 'format',
-            message: 'should match format "email"', // eslint-disable-line
+            message: 'should match format "email"',
             params: {
               format: 'email',
             },
