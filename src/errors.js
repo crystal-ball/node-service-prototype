@@ -34,7 +34,7 @@ const customErrorConstructor = (error, { code, name, details }) => {
   error.code = code
   error.name = name
 
-  details.forEach(detail => {
+  details.forEach((detail) => {
     error[detail] = details[detail]
   })
   /* eslint-enable no-param-reassign */

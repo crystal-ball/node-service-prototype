@@ -13,7 +13,7 @@ const jsonParser = bodyParser.json()
 /**
  * Handle mounting all routes to app
  */
-const initializeRoutes = app => {
+const initializeRoutes = (app) => {
   app.get('/healthcheck', (req, res) => {
     res.send({ data: '🔮✨ MAGIC' })
   })

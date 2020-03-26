@@ -44,19 +44,19 @@ if (process.env.NODE_ENV !== 'production') {
   // in options.prettyPrint. The returned fn is called for log prettifying.
   // Service wraps pino-pretty with some additional custom formatting (so that
   // an entire custom prettifier isn't needed)
-  options.prettifier = () => rawLog =>
+  options.prettifier = () => (rawLog) =>
     prettifier(rawLog).replace(
       // Note that info and warn have an extra space from the ignored hostname/pid info
       /INFO\s|WARN\s|DEBUG|ERROR|FATAL/,
-      matchedLevel =>
+      (matchedLevel) =>
         ({
           // Remove extra space between INFO and :
           'INFO ': 'INFO',
-          ERROR: '💥 ERROR',
+          'ERROR': '💥 ERROR',
           // These emoji require two spaces to look correct
-          DEBUG: 'ℹ️  DEBUG',
+          'DEBUG': 'ℹ️  DEBUG',
           'WARN ': '⚠️  WARN',
-          FATAL: '☢️  FATAL',
+          'FATAL': '☢️  FATAL',
         }[matchedLevel]),
     )
 }

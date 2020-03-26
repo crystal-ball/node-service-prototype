@@ -4,7 +4,7 @@
 
 exports.shorthands = undefined
 
-exports.up = pgm => {
+exports.up = (pgm) => {
   pgm.createExtension('uuid-ossp', { ifNotExists: true })
   pgm.createTable('accounts', {
     id: {

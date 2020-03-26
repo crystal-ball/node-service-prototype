@@ -22,7 +22,7 @@ class DB {
       database: configs.POSTGRES_DATABASE,
     })
 
-    this.pool.on('error', err => {
+    this.pool.on('error', (err) => {
       logger.fatal('Unexpected error on idle client', err)
       process.exit(1)
     })

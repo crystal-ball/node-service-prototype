@@ -27,7 +27,7 @@ class Configs {
    */
   initializeConfigs = async () => {
     // Overwrite default configs with environment values if set
-    Object.keys(this.configs).forEach(config => {
+    Object.keys(this.configs).forEach((config) => {
       this.configs[config] = process.env[config] || this.configs[config]
     })
 
