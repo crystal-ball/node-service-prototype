@@ -4,10 +4,7 @@ describe('Acceptance - Authentication Routes', () => {
   test('When correct credentials are sent to /auth/login, then session cookie is returned', async () => {
     const { email, password } = await createAccount()
 
-    const res = await service
-      .post('/auth/login')
-      .send({ email, password })
-      .expect(200)
+    const res = await service.post('/auth/login').send({ email, password }).expect(200)
 
     expect(res.headers['set-cookie'][0]).toEqual(expect.stringContaining('session='))
   })

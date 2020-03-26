@@ -23,7 +23,7 @@ const request = http.request(options, ({ statusCode }) => {
   process.exit()
 })
 
-request.on('error', err => {
+request.on('error', (err) => {
   console.error('💥 ERROR', err)
   process.exit(1)
 })

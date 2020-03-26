@@ -93,7 +93,7 @@ const unknownErrorHandler = (err, req, res, next) => {
   })
 }
 
-const initalizeErrorHandlers = async app => {
+const initalizeErrorHandlers = async (app) => {
   app.use(serviceErrorsHandler)
   app.use(bodyParserErrorHandler)
   app.use(unknownErrorHandler)

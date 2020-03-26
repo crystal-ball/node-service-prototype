@@ -43,7 +43,7 @@ const initializeService = async () => {
     .listen(SERVICE_PORT, SERVICE_HOST, () => {
       loggers.logger.info(`Service listening on http://localhost:${SERVICE_PORT}`)
     })
-    .on('error', err => {
+    .on('error', (err) => {
       // eslint-disable-next-line no-console
       console.log(err)
       process.exit(1)
