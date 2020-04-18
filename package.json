@@ -54,14 +54,14 @@
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/preset-env": "7.9.0",
+    "@babel/preset-env": "7.9.5",
     "@crystal-ball/commitizen-base": "2.4.0",
-    "@crystal-ball/prettier-base": "2.0.0",
-    "@types/jest": "25.1.4",
-    "eslint-config-eloquence": "13.6.0",
-    "husky": "4.2.3",
-    "jest": "25.2.1",
-    "nodemon": "2.0.2",
+    "@crystal-ball/prettier-base": "2.1.0",
+    "@types/jest": "25.2.1",
+    "eslint-config-eloquence": "13.7.0",
+    "husky": "4.2.5",
+    "jest": "25.3.0",
+    "nodemon": "2.0.3",
     "supertest": "4.0.2"
   },
   "config": {
