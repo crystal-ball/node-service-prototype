@@ -11,7 +11,7 @@
 const http = require('http')
 
 const options = {
-  host: process.env.SERVICE_HOST || '127.0.01',
+  host: process.env.SERVICE_HOST || '127.0.0.1',
   port: process.env.SERVICE_PORT || 9000,
   path: '/healthcheck',
   timeout: 1000,

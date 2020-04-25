@@ -10,7 +10,7 @@
  */
 
 const pino = require('pino')
-const nanoid = require('nanoid')
+let { nanoid } = require('nanoid')
 
 const { logger } = require('../logger')
 

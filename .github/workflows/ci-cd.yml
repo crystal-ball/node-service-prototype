@@ -1,0 +1,36 @@
+name: CI/CD
+on: [push]
+
+jobs:
+  # --- Package testing ✅
+  test:
+    name: Continuous Integration
+    if: contains(github.event.head_commit.message, 'skip ci') == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.16'
+      - name: Code Climate - Setup
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Test
+        run: |
+          docker build -t crystal-ball/node-service-prototype:tests-runner --target tests-runner .
+          docker run -v $(pwd)/coverage:/tmp crystal-ball/node-service-prototype:tests-runner cp -a /opt/service/coverage/. /tmp/
+
+          docker build -t crystal-ball/node-service-prototype:prod --target prod .
+          docker-compose -f docker-compose.ci.yml up --exit-code-from tests-runner
+      # Upload test code coverage report to Code Climate (branch must be explicitly set)
+      - name: Code Climate - Report
+        if: success()
+        run: |
+          export GIT_BRANCH="${GIT_BRANCH:-${GITHUB_REF:11}}"
+          ./cc-test-reporter after-build --prefix /usr/src
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GIT_BRANCH: ${{ github.head_ref }}

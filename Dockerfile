@@ -78,8 +78,13 @@ COPY --chown=node:node . .
 # Tests require devDependencies -> pull in from dev build stage
 COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
 
-# Testing time!
-CMD ["npm", "test"]
+# Testing time! Execute linting and unit tests as part of image build steps,
+# Coverage is copied out of built image for CodeClimate reporting
+RUN npm test
+
+# CI uses the tests-runner build target for the final acceptance testing step by
+# running this container
+CMD ["npm", "run", "test:acceptance"]
 
 # --- 5️⃣ Production preparation
 FROM base as pre-production
