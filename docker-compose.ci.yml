@@ -47,7 +47,7 @@ services:
 
   tests-runner:
     image: crystal-ball/node-service-prototype:tests-runner
-    container_name: tests-runner
+    container_name: tests-runner-container
     volumes:
       - .:/opt/service:delegated
       - tests-runner-node-service-prototype/opt/service/node_modules
