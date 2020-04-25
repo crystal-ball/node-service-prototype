@@ -24,8 +24,10 @@ jobs:
           docker build -t crystal-ball/node-service-prototype:prod --target prod .
           docker-compose -f docker-compose.ci.yml up --exit-code-from tests-runner
 
+          # A coverage directory is created during compose run, delete before attempting
+          # to copy contents to prevent permissions issues
           rm -rf coverage
-          docker cp tests-runner-container:/opt/service/coverage .
+          docker run --rm -v $(pwd)/coverage:/tmp crystal-ball/node-service-prototype:tests-runner cp -a /opt/service/coverage/. /tmp/
       # Upload test code coverage report to Code Climate (branch must be explicitly set)
       - name: Code Climate - Report
         if: success()
