@@ -2,7 +2,7 @@
 
 'use strict'
 
-const migrate = require('node-pg-migrate')
+const migrate = require('node-pg-migrate').default
 const { service } = require('../utils/resources')
 
 // Default configs set to work for running acceptance tests from local against

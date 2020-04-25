@@ -32,7 +32,7 @@ services:
       # Slow down start period and back off interval for service container when
       # testing to minimize log noise from healthcheck endpoint
       start_period: 5s
-      interval: 60s
+      interval: 30s
     environment:
       SERVICE_HOST: '0.0.0.0'
       SERVICE_PORT: 9000
