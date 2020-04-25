@@ -50,7 +50,7 @@ services:
     container_name: tests-runner-container
     volumes:
       - .:/opt/service:delegated
-      - tests-runner-node-service-prototype/opt/service/node_modules
+      - tests-runner-node-service-prototype:/opt/service/node_modules
     environment:
       DEPLOY_ENVIRONMENT: ci
       SERVICE_HOST: test-node-service-prototype
