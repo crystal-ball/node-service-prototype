@@ -11,8 +11,6 @@ services:
       interval: 5s
       start_period: 1s
     restart: always
-    ports:
-      - '5433:5432'
     environment:
       POSTGRES_USER: test_user
       POSTGRES_PASSWORD: test_password
@@ -21,8 +19,6 @@ services:
   # In CI use the image that was already built for running unit tests
   test-node-service-prototype:
     image: crystal-ball/node-service-prototype:prod
-    ports:
-      - '9001:9000'
     healthcheck:
       # Slow down start period and back off interval for service container when
       # testing to minimize log noise from healthcheck endpoint
@@ -45,7 +41,6 @@ services:
     volumes:
       - ./migrations:/opt/service/migrations
     environment:
-      DEPLOY_ENVIRONMENT: ci
       SERVICE_HOST: test-node-service-prototype
       SERVICE_PORT: 9000
       POSTGRES_HOST: test-postgres
