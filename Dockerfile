@@ -70,13 +70,12 @@ CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src
 # Run the entire test suite including linting, unit and acceptance tests for
 # service as part of CI/CD using Compose
 FROM base as tests-runner
-USER node
 
 # Tests require all resources copied in to workspace
-COPY --chown=node:node . .
+COPY . .
 
 # Tests require devDependencies -> pull in from dev build stage
-COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
+COPY --from=dev /opt/service/node_modules /opt/service/node_modules
 
 RUN npm run test:lint
 RUN npm run test:unit
