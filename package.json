@@ -29,7 +29,6 @@
     "migrate": "node-pg-migrate",
     "migrations:up": "node ./scripts/run-migrations.js",
     "test": "npm run test:lint && npm run test:unit",
-    "test:ci": "npm run test:lint && npm run test:unit && npm run test:acceptance",
     "test:lint": "NODE_ENV=test eslint --format=pretty scripts src test",
     "test:unit": "TEST_SUITE=unit JEST_COLLECT_COVERAGE=1 jest src",
     "test:acceptance": "TEST_SUITE=acceptance jest test",

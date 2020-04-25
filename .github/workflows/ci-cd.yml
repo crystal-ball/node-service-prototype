@@ -30,7 +30,7 @@ jobs:
         if: success()
         run: |
           export GIT_BRANCH="${GIT_BRANCH:-${GITHUB_REF:11}}"
-          ./cc-test-reporter after-build --prefix /usr/src
+          ./cc-test-reporter after-build --prefix /opt/service
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           GIT_BRANCH: ${{ github.head_ref }}

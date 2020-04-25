@@ -78,8 +78,11 @@ COPY --chown=node:node . .
 # Tests require devDependencies -> pull in from dev build stage
 COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
 
+RUN npm run test:lint
+RUN npm run test:unit
+
 # Testing time! 
-CMD ["npm", "test:ci"]
+CMD ["npm", "run", "test:acceptance"]
 
 # --- 5️⃣ Production preparation
 FROM base as pre-production

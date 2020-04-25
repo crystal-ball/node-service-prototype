@@ -51,6 +51,7 @@ services:
     volumes:
       - .:/opt/service:delegated
       - tests-runner-node-service-prototype:/opt/service/node_modules
+      - tests-runner-node-service-prototype-code-coverage:/opt/service/coverage
     environment:
       DEPLOY_ENVIRONMENT: ci
       SERVICE_HOST: test-node-service-prototype
@@ -67,3 +68,4 @@ services:
 volumes:
   test-node-service-prototype:
   tests-runner-node-service-prototype:
+  tests-runner-node-service-prototype-code-coverage:
