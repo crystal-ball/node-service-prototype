@@ -69,17 +69,22 @@ CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src
 # --- 4️⃣ Testing ---
 # Run the entire test suite including linting, unit and acceptance tests for
 # service as part of CI/CD using Compose
+# ℹ️ Running as user node will cause code coverage copy to fail in Github actions
 FROM base as tests-runner
-USER node
 
 # Tests require all resources copied in to workspace
-COPY --chown=node:node . .
+COPY . .
 
 # Tests require devDependencies -> pull in from dev build stage
-COPY --from=dev --chown=node:node /opt/service/node_modules /opt/service/node_modules
+COPY --from=dev /opt/service/node_modules /opt/service/node_modules
 
-# Testing time!
-CMD ["npm", "test"]
+# Run linting and unit tests during image build to verify foundational tests
+# are passing before creating prod container
+RUN npm run test:lint
+RUN npm run test:unit
+
+# Testing time! Stage is used in CI to execute acceptance tests
+CMD ["npm", "run", "test:acceptance"]
 
 # --- 5️⃣ Production preparation
 FROM base as pre-production
