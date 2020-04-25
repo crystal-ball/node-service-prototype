@@ -24,7 +24,9 @@ jobs:
           docker build -t crystal-ball/node-service-prototype:prod --target prod .
           docker-compose -f docker-compose.ci.yml up --exit-code-from tests-runner
 
-          docker run --rm -v $(pwd)/coverage:/tmp crystal-ball/node-service-prototype:tests-runner cp -a /opt/service/coverage/. /tmp/
+          # Create a named container to copy out code coverage report for CodeClimate
+          docker create --name coverage-container crystal-ball/node-service-prototype:tests-runner
+          docker cp coverage-container:/opt/service/coverage .
       # Upload test code coverage report to Code Climate (branch must be explicitly set)
       - name: Code Climate - Report
         if: success()

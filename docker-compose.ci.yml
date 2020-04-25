@@ -42,7 +42,6 @@ services:
 
   tests-runner:
     image: crystal-ball/node-service-prototype:tests-runner
-    container_name: tests-runner-container
     volumes:
       - ./migrations:/opt/service/migrations
     environment:
