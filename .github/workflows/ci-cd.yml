@@ -21,7 +21,7 @@ jobs:
       - name: Test
         run: |
           docker build -t crystal-ball/node-service-prototype:tests-runner --target tests-runner .
-          docker run --rm -v $(pwd)/coverage:/tmp crystal-ball/node-service-prototype:tests-runner cp -a /opt/service/coverage/. /tmp/
+          docker run --rm -v $(pwd)/coverage:/opt/service/_coverage crystal-ball/node-service-prototype:tests-runner cp -a /opt/service/coverage/. /opt/service/_coverage/
 
           docker build -t crystal-ball/node-service-prototype:prod --target prod .
           docker-compose -f docker-compose.ci.yml up --exit-code-from tests-runner
