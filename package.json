@@ -72,5 +72,10 @@
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
     }
+  },
+  "renovate": {
+    "extends": [
+      "github>crystal-ball/renovate-base:project"
+    ]
   }
 }
