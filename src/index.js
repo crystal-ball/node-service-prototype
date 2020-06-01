@@ -16,8 +16,7 @@ const { reqLogger } = require('./middleware/req-logger')
  * start service instance
  */
 const initializeService = async () => {
-  // eslint-disable-next-line no-console
-  console.log('Begin initializing service 🚀')
+  console.log('Begin initializing service 🚀') // eslint-disable-line no-console
 
   const app = express()
 
@@ -44,9 +43,9 @@ const initializeService = async () => {
       loggers.logger.info(`Service listening on http://localhost:${SERVICE_PORT}`)
     })
     .on('error', (err) => {
-      // eslint-disable-next-line no-console
-      console.log(err)
-      process.exit(1)
+      console.log(err) // eslint-disable-line no-console
+      process.exitCode(1)
+      throw err
     })
 
   // --- Setup service graceful shutdown ---
@@ -59,11 +58,10 @@ const initializeService = async () => {
       await db.close()
 
       loggers.logger.info('Server successfully shut down')
-      process.exit(0)
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to shutdown gracefully', err)
-      process.exit(1)
+      console.error('Failed to shutdown gracefully', err) // eslint-disable-line no-console
+      process.exitCode(1)
+      throw err
     }
   }
 

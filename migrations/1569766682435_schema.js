@@ -1,10 +1,8 @@
-/* eslint-disable camelcase */
-
 'use strict'
 
-exports.shorthands = undefined
+module.exports.shorthands = undefined
 
-exports.up = (pgm) => {
+module.exports.up = (pgm) => {
   pgm.createExtension('uuid-ossp', { ifNotExists: true })
   pgm.createTable('accounts', {
     id: {
@@ -37,4 +35,4 @@ exports.up = (pgm) => {
   })
 }
 
-exports.down = () => {}
+module.exports.down = () => {}

@@ -1,4 +1,8 @@
+/* eslint-disable node/no-process-env -- Service process.env accessor */
+
 'use strict'
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 class Configs {
   /**
@@ -45,4 +49,5 @@ const configsSingleton = new Configs()
 module.exports = {
   initializeConfigs: configsSingleton.initializeConfigs,
   getConfigs: configsSingleton.getConfigs,
+  DEVELOPMENT,
 }

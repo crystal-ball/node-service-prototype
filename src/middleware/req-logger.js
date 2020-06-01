@@ -65,7 +65,7 @@ function reqLogger(req, res, next) {
 
   res.on('finish', resLogger)
 
-  if (next) next()
+  next()
 }
 
 module.exports = {
