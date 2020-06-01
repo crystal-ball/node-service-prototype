@@ -1,7 +1,7 @@
 'use strict'
 
-const jwt = require('jsonwebtoken')
 const util = require('util')
+const jwt = require('jsonwebtoken')
 
 const { getConfigs } = require('../configs')
 

@@ -64,7 +64,7 @@ COPY --from=deps-builder --chown=node:node /opt/service/node_modules /opt/servic
 RUN npm install
 
 # Start the service with Nodemon!
-CMD ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src/**/*.spec.js' ./src/index.js
+CMD NODE_ENV=development ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --watch src --ignore 'src/**/*.spec.js' ./src/index.js
 
 # --- 4️⃣ Testing ---
 # Run the entire test suite including linting, unit and acceptance tests for

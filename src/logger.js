@@ -3,6 +3,8 @@
 const pino = require('pino')
 const prettyPrint = require('pino-pretty')
 
+const { DEVELOPMENT } = require('./configs')
+
 // http://getpino.io
 // https://github.com/pinojs/pino-pretty
 
@@ -29,7 +31,7 @@ const options = {
 }
 
 // Setup pretty printing for logs outside of production
-if (process.env.NODE_ENV !== 'production') {
+if (DEVELOPMENT) {
   const prettifier = prettyPrint({
     colorize: true,
     translateTime: 'h:MM:ss',

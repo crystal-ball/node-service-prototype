@@ -1,7 +1,7 @@
 'use strict'
 
-const { getPool } = require('./index')
 const { UniqueConstraintError, pgErrorsMap } = require('../errors')
+const { getPool } = require('./index')
 
 const insertAccount = async ({ email, name, hashedPassword }, logger) => {
   const pool = getPool()

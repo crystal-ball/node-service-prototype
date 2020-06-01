@@ -24,7 +24,8 @@ class DB {
 
     this.pool.on('error', (err) => {
       logger.fatal('Unexpected error on idle client', err)
-      process.exit(1)
+      process.exitCode(1)
+      throw err
     })
 
     try {

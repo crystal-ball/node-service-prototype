@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 'use strict'
 
 const migrate = require('node-pg-migrate').default
