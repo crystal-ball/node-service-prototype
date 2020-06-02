@@ -18,6 +18,10 @@ module.exports = {
   collectCoverage: Boolean(JEST_COLLECT_COVERAGE),
   coverageReporters: ['text-summary', 'lcov'],
   collectCoverageFrom: ['src/**/*.js'],
+  coverageProvider: 'v8',
+
+  // Babel transforms have to be explicitly disabled
+  transform: {},
 
   globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
 }
