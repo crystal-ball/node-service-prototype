@@ -1,4 +1,6 @@
-import { initalizeErrorHandlers, unknownErrorHandler } from './error-handlers'
+'use strict'
+
+const { initalizeErrorHandlers, unknownErrorHandler } = require('./error-handlers')
 
 const mockResponse = (status, send, options) => {
   const res = { ...options }
