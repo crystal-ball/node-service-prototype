@@ -44,10 +44,10 @@
     "helmet": "3.23.3",
     "jsonwebtoken": "8.5.1",
     "nanoid": "3.1.10",
-    "node-pg-migrate": "5.2.0",
-    "pg": "8.2.2",
-    "pino": "6.3.2",
-    "pino-pretty": "4.0.0"
+    "node-pg-migrate": "5.3.0",
+    "pg": "8.3.0",
+    "pino": "6.4.1",
+    "pino-pretty": "4.1.0"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.7.1",
