@@ -43,7 +43,7 @@
     "express": "4.17.1",
     "helmet": "3.23.3",
     "jsonwebtoken": "8.5.1",
-    "nanoid": "3.1.10",
+    "nanoid": "3.1.11",
     "node-pg-migrate": "5.3.0",
     "pg": "8.3.0",
     "pino": "6.4.1",
