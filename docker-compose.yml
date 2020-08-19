@@ -4,7 +4,7 @@ version: '2.4'
 
 services:
   postgres:
-    image: postgres:11.8
+    image: postgres:11.9
     healthcheck:
       test: pg_isready -h 127.0.0.1 -d rad_db -U rad_user
       interval: 1s
