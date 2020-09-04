@@ -5,7 +5,7 @@ version: '2.4'
 
 services:
   test-postgres:
-    image: postgres:11.8
+    image: postgres:11.9
     healthcheck:
       test: pg_isready -h 127.0.0.1 -d test_db -U test_user
       interval: 5s
