@@ -36,25 +36,25 @@
     "format": "prettier --write . !coverage"
   },
   "dependencies": {
-    "ajv": "6.12.4",
+    "ajv": "6.12.5",
     "argon2": "0.27.0",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
-    "helmet": "4.1.0",
+    "helmet": "4.1.1",
     "jsonwebtoken": "8.5.1",
     "nanoid": "3.1.12",
-    "node-pg-migrate": "5.6.0",
+    "node-pg-migrate": "5.7.1",
     "pg": "8.3.3",
-    "pino": "6.5.1",
-    "pino-pretty": "4.2.0"
+    "pino": "6.6.1",
+    "pino-pretty": "4.2.1"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-base": "2.7.1",
-    "@crystal-ball/prettier-base": "2.2.0",
-    "@types/jest": "26.0.12",
-    "eslint-config-eloquence": "14.10.0",
-    "husky": "4.2.5",
+    "@crystal-ball/commitizen-base": "2.8.0",
+    "@crystal-ball/prettier-base": "2.4.0",
+    "@types/jest": "26.0.14",
+    "eslint-config-eloquence": "15.3.0",
+    "husky": "4.3.0",
     "jest": "26.4.2",
     "nodemon": "2.0.4",
     "supertest": "4.0.2"

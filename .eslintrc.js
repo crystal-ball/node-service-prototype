@@ -4,5 +4,6 @@ const eloquence = require('eslint-config-eloquence')
 
 module.exports = eloquence({
   target: 'node',
-  esm: false,
+  enableESM: false,
+  enableTS: false,
 })
