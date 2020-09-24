@@ -6,4 +6,3 @@
  *
  * If account details are not found, throw an error to end response
  */
-
