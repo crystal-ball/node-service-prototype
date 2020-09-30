@@ -53,11 +53,11 @@
     "@crystal-ball/commitizen-base": "2.8.0",
     "@crystal-ball/prettier-base": "2.4.0",
     "@types/jest": "26.0.14",
-    "eslint-config-eloquence": "15.3.0",
+    "eslint-config-eloquence": "16.3.1",
     "husky": "4.3.0",
     "jest": "26.4.2",
     "nodemon": "2.0.4",
-    "supertest": "4.0.2"
+    "supertest": "5.0.0"
   },
   "prettier": "@crystal-ball/prettier-base",
   "config": {
