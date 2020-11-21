@@ -41,25 +41,24 @@
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
-    "helmet": "4.1.1",
+    "helmet": "4.2.0",
     "jsonwebtoken": "8.5.1",
-    "nanoid": "3.1.12",
-    "node-pg-migrate": "5.8.1",
-    "pg": "8.4.1",
+    "nanoid": "3.1.18",
+    "node-pg-migrate": "5.9.0",
+    "pg": "8.5.1",
     "pino": "6.7.0",
     "pino-pretty": "4.3.0"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-base": "2.8.0",
+    "@crystal-ball/commitizen-base": "2.9.0",
     "@crystal-ball/prettier-base": "2.4.0",
     "@types/jest": "26.0.15",
-    "eslint-config-eloquence": "16.6.0",
+    "eslint-config-eloquence": "16.7.1",
     "husky": "4.3.0",
     "jest": "26.6.3",
     "nodemon": "2.0.6",
     "supertest": "6.0.1"
   },
-  "prettier": "@crystal-ball/prettier-base",
   "config": {
     "commitizen": {
       "path": "@crystal-ball/commitizen-base"
