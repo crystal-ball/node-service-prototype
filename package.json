@@ -37,17 +37,17 @@
   },
   "dependencies": {
     "ajv": "6.12.6",
-    "argon2": "0.27.0",
+    "argon2": "0.27.1",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
-    "helmet": "4.2.0",
+    "helmet": "4.4.1",
     "jsonwebtoken": "8.5.1",
     "nanoid": "3.1.20",
     "node-pg-migrate": "5.9.0",
     "pg": "8.5.1",
-    "pino": "6.7.0",
-    "pino-pretty": "4.3.0"
+    "pino": "6.11.0",
+    "pino-pretty": "4.5.0"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.9.0",
