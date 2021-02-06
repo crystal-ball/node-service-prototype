@@ -96,7 +96,7 @@ describe('Acceptance - Accounts Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '.email',
+            dataPath: '/email',
             keyword: 'format',
             message: 'should match format "email"',
             params: {
