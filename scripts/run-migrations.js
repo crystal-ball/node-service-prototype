@@ -9,7 +9,7 @@
  * 3. npm run migrate:up
  */
 
-const migrate = require('node-pg-migrate')
+const migrate = require('node-pg-migrate').default
 
 const host = process.env.POSTGRES_HOST
 const database = process.env.POSTGRES_DB
@@ -21,9 +21,11 @@ const performMigrations = async () => {
   console.log('Running DB migrations ...')
   try {
     await migrate({
+      count: 1,
       databaseUrl: `postgres://${user}:${password}@${host}:${port}/${database}`,
       dir: 'migrations',
       direction: 'up',
+      migrationsTable: 'migrations',
     })
     console.log('🎉 Migrations completed')
     process.exit(0)

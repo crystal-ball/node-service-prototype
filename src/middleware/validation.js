@@ -6,12 +6,15 @@
  * @module
  */
 
-const Ajv = require('ajv')
+const Ajv = require('ajv').default
+const addFormats = require('ajv-formats').default
 
 // NB: AJV uses JSON Schema draft-07
 // NB: validation errors are stored on the ajv instance until next validate call
 // https://json-schema.org/understanding-json-schema
 const ajv = new Ajv({ removeAdditional: true })
+// Add JSON formats for email, dates, etc.
+addFormats(ajv)
 
 /**
  * Uses validation schemas for a req body, headers and query params to perform
@@ -25,18 +28,21 @@ const requestValidation = ({ body, headers, queryParams }) => (req, res, next) =
   const errors = []
 
   if (body) {
-    const valid = ajv.validate(body, req.body)
-    if (!valid) errors.push(...ajv.errors)
+    const validate = ajv.compile(body)
+    const valid = validate(req.body)
+    if (!valid) errors.push(...validate.errors)
   }
 
   if (headers) {
-    const valid = ajv.validate(headers, req.headers)
-    if (!valid) errors.push(...ajv.errors)
+    const validate = ajv.compile(headers)
+    const valid = validate(req.headers)
+    if (!valid) errors.push(...validate.errors)
   }
 
   if (queryParams) {
-    const valid = ajv.validate(queryParams, req.query)
-    if (!valid) errors.push(...ajv.errors)
+    const validate = ajv.compile(queryParams)
+    const valid = validate(req.query)
+    if (!valid) errors.push(...validate.errors)
   }
 
   if (!errors.length) return next() // Good news, this request is valid 🎉
