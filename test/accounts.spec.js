@@ -3,7 +3,7 @@
 const { createAccount, createEmail, service } = require('./utils/resources')
 
 describe('Acceptance - Accounts Routes', () => {
-  test('When a valid payload is sent to /account/create, then an account is created', async () => {
+  it('When a valid payload is sent to /account/create, then an account is created', async () => {
     const name = 'Rad Tester'
     const email = createEmail()
     const password = 'hecka rad secret tester'
@@ -13,11 +13,13 @@ describe('Acceptance - Accounts Routes', () => {
       .send({ name, email, password })
       .expect(201)
 
-    expect(res.body).toEqual({ data: { name, email } })
-    expect(res.headers['set-cookie'][0]).toEqual(expect.stringContaining('session='))
+    expect(res.body).toStrictEqual({ data: { name, email } })
+    expect(res.headers['set-cookie'][0]).toStrictEqual(
+      expect.stringContaining('session='),
+    )
   })
 
-  test('When a single email is used to create multiple accounts, then service responds with user exists', async () => {
+  it('When a single email is used to create multiple accounts, then service responds with user exists', async () => {
     const { email } = await createAccount()
 
     const res = await service
@@ -25,7 +27,7 @@ describe('Acceptance - Accounts Routes', () => {
       .send({ name: 'Duplicate Email', email, password: 'duplicate email' })
       .expect(422)
 
-    expect(res.body).toEqual({
+    expect(res.body).toStrictEqual({
       error: {
         code: 'ACCOUNT_EXISTS',
         message: 'Account for email already exists',
@@ -34,21 +36,21 @@ describe('Acceptance - Accounts Routes', () => {
     expect(res.headers['set-cookie']).toBeFalsy()
   })
 
-  test('When name is missing in account create, then service responds with error', async () => {
+  it('When name is missing in account create, then service responds with error', async () => {
     const res = await service
       .post('/account/create')
       .send({ email: createEmail(), password: 'hecka rad secret tester' })
       .expect(400)
 
-    expect(res.body).toEqual({
+    expect(res.body).toStrictEqual({
       error: {
         code: 'INVALID_REQUEST',
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'name'",
+            message: "must have required property 'name'",
             params: {
               missingProperty: 'name',
             },
@@ -59,21 +61,21 @@ describe('Acceptance - Accounts Routes', () => {
     })
   })
 
-  test('When email is missing in account create, then service responds with error', async () => {
+  it('When email is missing in account create, then service responds with error', async () => {
     const res = await service
       .post('/account/create')
       .send({ name: 'Rad Tester', password: 'hecka rad secret tester' })
       .expect(400)
 
-    expect(res.body).toEqual({
+    expect(res.body).toStrictEqual({
       error: {
         code: 'INVALID_REQUEST',
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'email'",
+            message: "must have required property 'email'",
             params: {
               missingProperty: 'email',
             },
@@ -84,21 +86,21 @@ describe('Acceptance - Accounts Routes', () => {
     })
   })
 
-  test('When email is invalid in account create, then service responds with error', async () => {
+  it('When email is invalid in account create, then service responds with error', async () => {
     const res = await service
       .post('/account/create')
       .send({ name: 'Rad Tester', email: 'uh-oh', password: 'hecka rad secret tester' })
       .expect(400)
 
-    expect(res.body).toEqual({
+    expect(res.body).toStrictEqual({
       error: {
         code: 'INVALID_REQUEST',
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '/email',
+            instancePath: '/email',
             keyword: 'format',
-            message: 'should match format "email"',
+            message: 'must match format "email"',
             params: {
               format: 'email',
             },
@@ -109,21 +111,21 @@ describe('Acceptance - Accounts Routes', () => {
     })
   })
 
-  test('When password is missing in account create, then service responds with error', async () => {
+  it('When password is missing in account create, then service responds with error', async () => {
     const res = await service
       .post('/account/create')
       .send({ name: 'Rad Tester', email: createEmail() })
       .expect(400)
 
-    expect(res.body).toEqual({
+    expect(res.body).toStrictEqual({
       error: {
         code: 'INVALID_REQUEST',
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'password'",
+            message: "must have required property 'password'",
             params: {
               missingProperty: 'password',
             },

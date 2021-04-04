@@ -7,7 +7,7 @@ const { insertAccount } = require('./accounts')
 const db = require('.')
 
 describe('Accounts DB interface', () => {
-  test('When insertAccount is called with account details, then new user account is inserted', async () => {
+  it('When insertAccount is called with account details, then new user account is inserted', async () => {
     const accountData = { email: 'test', name: 'test', hashedPassword: 'test' }
     const mockLogger = {
       error: jest.fn(),
@@ -22,11 +22,11 @@ describe('Accounts DB interface', () => {
 
     const result = await insertAccount(accountData, mockLogger)
 
-    expect(result).toEqual(accountData)
+    expect(result).toStrictEqual(accountData)
     expect(mockLogger.error).not.toHaveBeenCalled()
   })
 
-  test('When insertAccount is called with existing email, then a UniqueConstrainError is thrown', async () => {
+  it('When insertAccount is called with existing email, then a UniqueConstrainError is thrown', async () => {
     // ℹ️ Mock pg throwing a unique constrain error which should be caught and
     // tranformed to a friendly service custom error
 
@@ -48,7 +48,7 @@ describe('Accounts DB interface', () => {
     ).rejects.toThrow(UniqueConstraintError)
 
     // This should not log an error even though insert will throw
-    expect(mockLogger.info).toHaveBeenCalled()
+    expect(mockLogger.info).toHaveBeenCalledTimes(1)
     expect(mockLogger.error).not.toHaveBeenCalled()
   })
 })

@@ -17,7 +17,7 @@
   ],
   "license": "ISC",
   "engines": {
-    "node": ">14.10"
+    "node": "14"
   },
   "scripts": {
     "start": "docker-compose up",
@@ -33,29 +33,29 @@
     "test:unit": "TEST_SUITE=unit JEST_COLLECT_COVERAGE=1 jest src",
     "test:acceptance": "TEST_SUITE=acceptance jest test",
     "test:watch": "NOTIFY=1 jest --watch src",
+    "commit": "cz",
     "format": "prettier --write . !coverage"
   },
   "dependencies": {
-    "ajv": "7.1.0",
-    "ajv-formats": "1.5.1",
-    "argon2": "0.27.1",
+    "ajv": "8.0.5",
+    "ajv-formats": "2.0.2",
+    "argon2": "0.27.2",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
     "helmet": "4.4.1",
     "jsonwebtoken": "8.5.1",
-    "nanoid": "3.1.20",
+    "nanoid": "3.1.22",
     "node-pg-migrate": "5.9.0",
     "pg": "8.5.1",
-    "pino": "6.11.1",
-    "pino-pretty": "4.5.0"
+    "pino": "6.11.2",
+    "pino-pretty": "4.7.1"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.10.0",
     "@crystal-ball/prettier-base": "2.6.0",
     "@types/jest": "26.0.22",
-    "eslint-config-eloquence": "17.8.0",
-    "husky": "5.2.0",
+    "eslint-config-eloquence": "18.2.0",
     "jest": "26.6.3",
     "nodemon": "2.0.7",
     "supertest": "6.1.3"
@@ -63,11 +63,6 @@
   "config": {
     "commitizen": {
       "path": "@crystal-ball/commitizen-base"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
     }
   },
   "renovate": {

@@ -16,17 +16,17 @@ const mockResponse = (status, send, options) => {
 }
 
 describe('Error Handler', () => {
-  test('When initialize hook is called, then error handlers are mounted', async () => {
+  it('When initialize hook is called, then error handlers are mounted', async () => {
     const app = {
       use: jest.fn(),
     }
 
     await initalizeErrorHandlers(app)
 
-    expect(app.use).toHaveBeenCalled()
+    expect(app.use).toHaveBeenCalledTimes(3)
   })
 
-  test('When an unknown error is handled, then only sanitized responses are sent', () => {
+  it('When an unknown error is handled, then only sanitized responses are sent', () => {
     const testError = new Error('Oh no')
     const mockFatal = jest.fn()
     const req = () => {}
