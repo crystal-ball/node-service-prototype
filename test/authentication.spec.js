@@ -25,9 +25,9 @@ describe('Acceptance - Authentication Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'email'",
+            message: "must have required property 'email'",
             params: {
               missingProperty: 'email',
             },
@@ -50,9 +50,9 @@ describe('Acceptance - Authentication Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'password'",
+            message: "must have required property 'password'",
             params: {
               missingProperty: 'password',
             },
