@@ -48,9 +48,9 @@ describe('Acceptance - Accounts Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'name'",
+            message: "must have required property 'name'",
             params: {
               missingProperty: 'name',
             },
@@ -73,9 +73,9 @@ describe('Acceptance - Accounts Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'email'",
+            message: "must have required property 'email'",
             params: {
               missingProperty: 'email',
             },
@@ -98,9 +98,9 @@ describe('Acceptance - Accounts Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '/email',
+            instancePath: '/email',
             keyword: 'format',
-            message: 'should match format "email"',
+            message: 'must match format "email"',
             params: {
               format: 'email',
             },
@@ -123,9 +123,9 @@ describe('Acceptance - Accounts Routes', () => {
         message: 'Request is not valid',
         errors: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
-            message: "should have required property 'password'",
+            message: "must have required property 'password'",
             params: {
               missingProperty: 'password',
             },
