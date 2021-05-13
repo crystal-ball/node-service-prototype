@@ -22,7 +22,7 @@ jobs:
         run: |
           docker build -t crystal-ball/node-service-prototype:tests-runner --target tests-runner .
           docker build -t crystal-ball/node-service-prototype:prod --target prod .
-          docker compose -f docker-compose.ci.yml up --exit-code-from tests-runner
+          docker compose up -f docker-compose.ci.yml --exit-code-from tests-runner
 
           # Create a named container to copy out code coverage report for CodeClimate
           docker create --name coverage-container crystal-ball/node-service-prototype:tests-runner
