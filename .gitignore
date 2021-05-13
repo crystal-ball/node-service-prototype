@@ -1,5 +1,8 @@
 # --- Ignore ---
 
+# process.env
+.env
+
 # Dependencies
 node_modules
 
