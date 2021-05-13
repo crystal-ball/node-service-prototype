@@ -88,11 +88,11 @@ containers.
 npm install
 
 # Build and start the development containers with Docker Compose (shorthand
-# for `docker-compose up`)
+# for `docker compose up`)
 npm start
 
 # Start shell session in service container, then run pg migrations and exit
-docker-compose exec node-service-prototype /bin/sh
+docker compose exec node-service-prototype /bin/sh
 npm run migrations:up
 exit
 ```
@@ -167,7 +167,7 @@ automatic restarts.
 npm run test:acceptance
 
 # Restart the test service process after file changes required
-docker-compose -f docker-compose.test.yml restart test-service
+docker compose -f docker-compose.test.yml restart test-service
 ```
 
 #### CI/CD testing

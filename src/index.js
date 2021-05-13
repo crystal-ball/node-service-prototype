@@ -1,5 +1,9 @@
 'use strict'
 
+// ⏱ OTel tracer libraries must be required before other packages for
+// auto-instrumentation setup
+require('./tracer')
+
 const express = require('express')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')

@@ -4,8 +4,8 @@
  * Handle running migrations for the environment using env vars set by Docker
  * Compose, eg:
  *
- * 1. docker-compose up
- * 2. docker-compose exec service /bin/sh
+ * 1. docker compose up
+ * 2. docker compose exec service /bin/sh
  * 3. npm run migrate:up
  */
 

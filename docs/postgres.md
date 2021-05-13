@@ -17,7 +17,7 @@ The generated schema migration is then updated with the initial database schema
 and then the migration is run from inside a container:
 
 ```bash
-docker-compose exec node-service-prototype /bin/sh
+docker compose exec node-service-prototype /bin/sh
 npm run migrations:up
 ```
 
