@@ -60,7 +60,7 @@
     "pino-pretty": "4.8.0"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-base": "2.10.0",
+    "@crystal-ball/commitizen-base": "2.11.0",
     "@crystal-ball/prettier-base": "2.6.0",
     "@types/jest": "26.0.23",
     "eslint-config-eloquence": "19.1.0",
