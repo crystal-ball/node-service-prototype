@@ -25,5 +25,5 @@ module.exports = {
     '\\.[jt]sx?$': 'babel-jest',
   },
 
-  globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
+  globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.cjs' : undefined,
 }
