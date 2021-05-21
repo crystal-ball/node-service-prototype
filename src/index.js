@@ -18,7 +18,7 @@ import { reqLogger } from './middleware/req-logger.js'
  * start service instance
  */
 const initializeService = async () => {
-  console.log('Begin initializing service 🚀!') // eslint-disable-line no-console
+  console.log('Begin initializing service 🚀') // eslint-disable-line no-console
 
   const app = express()
 
