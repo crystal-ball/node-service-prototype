@@ -1,6 +1,4 @@
-'use strict'
-
-const { service } = require('./utils/resources')
+import { service } from './utils/resources'
 
 describe('Acceptance - Service', () => {
   it('When healthcheck is hit, service sends back a rad response', async () => {

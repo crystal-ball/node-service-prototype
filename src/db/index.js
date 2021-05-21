@@ -1,9 +1,9 @@
-'use strict'
+import pg from 'pg'
 
-const { Pool } = require('pg')
+import { getConfigs } from '../configs.js'
+import { logger } from '../logger.js'
 
-const { getConfigs } = require('../configs')
-const { logger } = require('../logger')
+const { Pool } = pg
 
 class DB {
   pool = undefined
@@ -60,7 +60,4 @@ class DB {
 
 const dbSingleton = new DB()
 
-module.exports = {
-  initializeDb: dbSingleton.initializeDb,
-  getPool: dbSingleton.getPool,
-}
+export const { getPool, initializeDb } = dbSingleton

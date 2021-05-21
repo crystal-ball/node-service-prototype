@@ -1,26 +1,24 @@
-'use strict'
-
-// ⏱ OTel tracer libraries must be required before other packages for
+// ⏱ OTel tracer libraries must be imported before other packages for
 // auto-instrumentation setup
-require('./tracer')
+import './tracer.js'
 
-const express = require('express')
-const helmet = require('helmet')
-const cookieParser = require('cookie-parser')
+import express from 'express'
+import helmet from 'helmet'
+import cookieParser from 'cookie-parser'
 
-const { initializeConfigs } = require('./configs')
-const { initializeLogger } = require('./logger')
-const { initializeDb } = require('./db')
-const { initializeRoutes } = require('./router')
-const { initalizeErrorHandlers } = require('./middleware/error-handlers')
-const { reqLogger } = require('./middleware/req-logger')
+import { initializeConfigs } from './configs.js'
+import { initializeLogger } from './logger.js'
+import { initializeDb } from './db/index.js'
+import { initializeRoutes } from './router.js'
+import { initalizeErrorHandlers } from './middleware/error-handlers.js'
+import { reqLogger } from './middleware/req-logger.js'
 
 /**
  * Service entry point will manage initializing service resources and then
  * start service instance
  */
 const initializeService = async () => {
-  console.log('Begin initializing service 🚀') // eslint-disable-line no-console
+  console.log('Begin initializing service 🚀!') // eslint-disable-line no-console
 
   const app = express()
 

@@ -1,7 +1,5 @@
-'use strict'
-
-const { UnauthorizedError, ForbiddenError } = require('../errors')
-const { verifyJWT } = require('../utils')
+import { verifyJWT } from '../utils/index.js'
+import { ForbiddenError, UnauthorizedError } from '../errors.js'
 
 /**
  * Middleware should pick the jwt cookie from a req and verify it
@@ -9,7 +7,7 @@ const { verifyJWT } = require('../utils')
  * ELSE -> Throw a verification error to return a 403
  */
 
-const verifySession = async (req, res, next) => {
+export async function verifySession(req, res, next) {
   const { session } = req.cookies
   if (!session) return next(new UnauthorizedError())
 
@@ -21,5 +19,3 @@ const verifySession = async (req, res, next) => {
     return next(new ForbiddenError('Invalid session token'))
   }
 }
-
-module.exports = { verifySession }

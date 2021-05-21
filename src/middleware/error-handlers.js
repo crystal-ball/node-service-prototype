@@ -1,21 +1,19 @@
 /* eslint-disable max-params */
 
-'use strict'
-
 /**
  * Service error handlers middleware handle returning sanitized error responses
  * to ensure service internal operation details aren't exposed to hackers 😉
  * @module
  */
 
-const { customErrorCodes } = require('../errors')
+import { customErrorCodes } from '../errors.js'
 
 /**
  * Handle known service errors intentionally thrown in the code with a sanitized
  * response. (No additional error logging required as these are intentional req
  * failures)
  */
-const serviceErrorsHandler = (err, req, res, next) => {
+export const serviceErrorsHandler = (err, req, res, next) => {
   // If we're already writing res, then we must delegate to default Express
   // error handler to close connection and fail request
   if (res.headersSent) return next(err)
@@ -59,7 +57,7 @@ const bodyParserErrorTypes = [
  * Handle error thrown by bodyParser module. (They're setup with an `expose` flag
  * to signal if the error message is safe to pass through to client.)
  */
-const bodyParserErrorHandler = (err, req, res, next) => {
+export const bodyParserErrorHandler = (err, req, res, next) => {
   // If we're already writing res, then we must delegate to default Express
   // error handler to close connection and fail request
   if (res.headersSent) return next(err)
@@ -78,7 +76,7 @@ const bodyParserErrorHandler = (err, req, res, next) => {
  * wrong unintentionally! 😬 Log the complete error details and then send a
  * generic internal server error.
  */
-const unknownErrorHandler = (err, req, res, next) => {
+export const unknownErrorHandler = (err, req, res, next) => {
   // If we're already writing res, then we must delegate to default Express
   // error handler to close connection and fail request
   if (res.headersSent) return next(err)
@@ -93,15 +91,8 @@ const unknownErrorHandler = (err, req, res, next) => {
   })
 }
 
-const initalizeErrorHandlers = async (app) => {
+export async function initalizeErrorHandlers(app) {
   app.use(serviceErrorsHandler)
   app.use(bodyParserErrorHandler)
   app.use(unknownErrorHandler)
-}
-
-module.exports = {
-  serviceErrorsHandler,
-  bodyParserErrorHandler,
-  unknownErrorHandler,
-  initalizeErrorHandlers,
 }

@@ -20,8 +20,10 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.js'],
   coverageProvider: 'v8',
 
-  // Babel transforms have to be explicitly disabled
-  transform: {},
+  transform: {
+    // Jest doesn't support ESM yet so we use Babel to compile for testing
+    '\\.[jt]sx?$': 'babel-jest',
+  },
 
   globalSetup: TEST_SUITE === 'acceptance' ? './test/setup/global-setup.js' : undefined,
 }

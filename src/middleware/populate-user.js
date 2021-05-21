@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Middleware can be called for routes with an accountId, and middleware will look
  * up the account details and add them to the request.

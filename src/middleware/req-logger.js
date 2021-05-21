@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Service request+response logging middleware creates a child logger for each
  * incoming req with a unique req_id that can be used to link logs together.
@@ -9,10 +7,10 @@
  * @module
  */
 
-const pino = require('pino')
-const { nanoid } = require('nanoid')
+import pino from 'pino'
+import { nanoid } from 'nanoid'
 
-const { logger } = require('../logger')
+import { logger } from '../logger.js'
 
 const logMeta = Symbol('logMeta')
 
@@ -43,7 +41,7 @@ function resLogger() {
  * Handle creating and attaching child logger with unique id to each request
  * context for linked log messages.
  */
-function reqLogger(req, res, next) {
+export function reqLogger(req, res, next) {
   // http://getpino.io/#/docs/child-loggers
   const log = logger.child({ req_id: nanoid() })
   req.log = log
@@ -66,10 +64,6 @@ function reqLogger(req, res, next) {
   res.on('finish', resLogger)
 
   next()
-}
-
-module.exports = {
-  reqLogger,
 }
 
 /**

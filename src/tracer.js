@@ -1,28 +1,26 @@
-'use strict'
+import { config } from 'dotenv'
 
-require('dotenv').config()
-
-const { registerInstrumentations } = require('@opentelemetry/instrumentation')
-const { NodeTracerProvider } = require('@opentelemetry/node')
-const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http')
-const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express')
-const { CollectorTraceExporter } = require('@opentelemetry/exporter-collector')
-const { Resource, SERVICE_RESOURCE } = require('@opentelemetry/resources')
-const {
+import { registerInstrumentations } from '@opentelemetry/instrumentation'
+import { NodeTracerProvider } from '@opentelemetry/node'
+import { HttpInstrumentation } from '@opentelemetry/instrumentation-http'
+import { ExpressInstrumentation } from '@opentelemetry/instrumentation-express'
+import { CollectorTraceExporter } from '@opentelemetry/exporter-collector'
+import { Resource, SERVICE_RESOURCE } from '@opentelemetry/resources'
+import {
   BatchSpanProcessor,
   ConsoleSpanExporter,
   SimpleSpanProcessor,
-} = require('@opentelemetry/tracing')
+} from '@opentelemetry/tracing'
 
-const { version } = require('../package.json')
+config()
 
 // eslint-disable-next-line node/no-process-env
-const { LS_ACCESS_TOKEN } = process.env
+const { GIT_SHA, LS_ACCESS_TOKEN } = process.env
 
 // Create and register the tracer provider
 const provider = new NodeTracerProvider({
   resource: new Resource({
-    [SERVICE_RESOURCE.VERSION]: version,
+    [SERVICE_RESOURCE.VERSION]: (GIT_SHA || 'local').slice(0, 7),
   }),
 })
 provider.register()

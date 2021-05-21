@@ -1,7 +1,8 @@
-'use strict'
+import pgMigrate from 'node-pg-migrate'
+import { service } from '../utils/resources'
 
-const migrate = require('node-pg-migrate').default
-const { service } = require('../utils/resources')
+// @ts-expect-error -- pg-migrate is compiled to commonJS, using in ESM requires this .default which isn't in types
+const migrationsRunner = pgMigrate.default
 
 // Default configs set to work for running acceptance tests from local against
 // the Docker Compose containers
@@ -11,12 +12,12 @@ const user = process.env.POSTGRES_USER || 'test_user'
 const password = process.env.POSTGRES_PASSWORD || 'test_password'
 const database = process.env.POSTGRES_DATABASE || 'test_db'
 
-const globalSetup = async () => {
+export default async function globalSetup() {
   console.log('Running DB migrations ...')
   try {
     const databaseUrl = `postgres://${user}:${password}@${host}:${port}/${database}`
 
-    await migrate({
+    await migrationsRunner({
       databaseUrl,
       dir: 'migrations',
       direction: 'up',
@@ -35,5 +36,3 @@ const globalSetup = async () => {
     throw err
   }
 }
-
-module.exports = globalSetup

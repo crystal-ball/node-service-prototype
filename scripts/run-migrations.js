@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Handle running migrations for the environment using env vars set by Docker
  * Compose, eg:
@@ -9,7 +7,10 @@
  * 3. npm run migrate:up
  */
 
-const migrate = require('node-pg-migrate').default
+import pgMigrate from 'node-pg-migrate'
+
+// @ts-expect-error -- pg-migrate is compiled to commonJS, using in ESM requires this .default which isn't in types
+const migrationsRunner = pgMigrate.default
 
 const host = process.env.POSTGRES_HOST
 const database = process.env.POSTGRES_DB
@@ -20,7 +21,7 @@ const user = process.env.POSTGRES_USER
 const performMigrations = async () => {
   console.log('Running DB migrations ...')
   try {
-    await migrate({
+    await migrationsRunner({
       count: 1,
       databaseUrl: `postgres://${user}:${password}@${host}:${port}/${database}`,
       dir: 'migrations',
