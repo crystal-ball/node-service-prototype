@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Prototypical Node.js service",
   "main": "src/index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/crystal-ball/node-service-prototype.git"
@@ -60,6 +61,7 @@
     "pino-pretty": "4.8.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "7.14.2",
     "@crystal-ball/commitizen-base": "2.11.0",
     "@crystal-ball/prettier-base": "2.7.0",
     "@types/jest": "26.0.23",

@@ -1,13 +1,11 @@
-'use strict'
-
 /**
  * Middleware that can be used to enforce a valid request body, header or query
  * param schema.
  * @module
  */
 
-const Ajv = require('ajv').default
-const addFormats = require('ajv-formats').default
+import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
 
 // NB: AJV uses JSON Schema draft-07
 // NB: validation errors are stored on the ajv instance until next validate call
@@ -24,7 +22,7 @@ addFormats(ajv)
  * ?? Would it be helpful to add some logging about the body here? It has the
  * danger of accidentally logging user info if it's forgetten about...
  */
-const requestValidation =
+export const requestValidation =
   ({ body, headers, queryParams }) =>
   (req, res, next) => {
     const errors = []
@@ -57,5 +55,3 @@ const requestValidation =
       },
     })
   }
-
-module.exports = { requestValidation }

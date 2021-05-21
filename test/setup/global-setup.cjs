@@ -1,7 +1,12 @@
 'use strict'
 
 const migrate = require('node-pg-migrate').default
-const { service } = require('../utils/resources')
+const supertest = require('supertest')
+
+// Duplicating service resource until Jest supports ESModules
+// const { service } = require('../utils/resources')
+const serviceHost = process.env.SERVICE_HOST || 'http://127.0.0.1'
+const servicePort = process.env.SERVICE_PORT || 900
 
 // Default configs set to work for running acceptance tests from local against
 // the Docker Compose containers
@@ -11,7 +16,9 @@ const user = process.env.POSTGRES_USER || 'test_user'
 const password = process.env.POSTGRES_PASSWORD || 'test_password'
 const database = process.env.POSTGRES_DATABASE || 'test_db'
 
-const globalSetup = async () => {
+const service = supertest(`${serviceHost}:${servicePort}`)
+
+module.exports = async function globalSetup() {
   console.log('Running DB migrations ...')
   try {
     const databaseUrl = `postgres://${user}:${password}@${host}:${port}/${database}`
@@ -35,5 +42,3 @@ const globalSetup = async () => {
     throw err
   }
 }
-
-module.exports = globalSetup

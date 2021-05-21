@@ -1,8 +1,6 @@
-'use strict'
-
-const { insertAccount, selectAccountById } = require('../db/accounts')
-const { generatePasswordHash, signJWT } = require('../utils')
-const { UniqueConstraintError } = require('../errors')
+import { insertAccount, selectAccountById } from '../db/accounts.js'
+import { generatePasswordHash, signJWT } from '../utils/index.js'
+import { UniqueConstraintError } from '../errors.js'
 
 /**
  * POST - /account/create { email: String, name: String, password: String }
@@ -12,7 +10,7 @@ const { UniqueConstraintError } = require('../errors')
  * - Valid request will create a user and JWT session token
  * - Session token is returned in a secure cookie
  */
-const createAccount = {
+export const createAccount = {
   schema: {
     body: {
       $id: 'account-create-body',
@@ -78,7 +76,7 @@ const createAccount = {
 /**
  * GET - /account
  */
-const getAccount = {
+export const getAccount = {
   handler: async (req, res) => {
     const { id } = req.account
     req.log.info(`Looking up account ${id}`)
@@ -87,5 +85,3 @@ const getAccount = {
     res.send({ data: { name, email } })
   },
 }
-
-module.exports = { createAccount, getAccount }

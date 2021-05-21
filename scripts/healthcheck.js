@@ -1,12 +1,10 @@
-'use strict'
-
 /**
  * Module is used for performing healthchecks on service within Docker
  * This solution doesn't require installing curl in our image, and lets
  * us log rad emojis if the healthcheck fails.
  */
 
-const http = require('http')
+import http from 'http'
 
 const options = {
   host: process.env.SERVICE_HOST || '127.0.0.1',
