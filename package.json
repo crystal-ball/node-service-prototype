@@ -64,7 +64,7 @@
     "@babel/preset-env": "7.15.0",
     "@crystal-ball/commitizen-base": "2.11.0",
     "@crystal-ball/prettier-base": "2.8.0",
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.1",
     "eslint-config-eloquence": "19.1.0",
     "jest": "27.1.0",
     "nodemon": "2.0.12",
