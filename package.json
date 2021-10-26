@@ -18,7 +18,7 @@
   ],
   "license": "ISC",
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "scripts": {
     "start": "docker compose up",
