@@ -67,7 +67,7 @@
     "@types/jest": "27.5.2",
     "eslint-config-eloquence": "19.1.0",
     "jest": "27.5.1",
-    "nodemon": "2.0.18",
+    "nodemon": "2.0.19",
     "supertest": "6.2.3"
   },
   "config": {
