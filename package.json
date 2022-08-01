@@ -61,14 +61,14 @@
     "pino-pretty": "4.8.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.18.6",
+    "@babel/preset-env": "7.18.9",
     "@crystal-ball/commitizen-base": "2.11.0",
     "@crystal-ball/prettier-base": "2.12.0",
     "@types/jest": "27.5.2",
     "eslint-config-eloquence": "19.1.0",
     "jest": "27.5.1",
-    "nodemon": "2.0.18",
-    "supertest": "6.2.3"
+    "nodemon": "2.0.19",
+    "supertest": "6.2.4"
   },
   "config": {
     "commitizen": {
