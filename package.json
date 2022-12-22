@@ -53,7 +53,7 @@
     "dotenv": "9.0.2",
     "express": "4.17.1",
     "helmet": "4.6.0",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "nanoid": "3.1.23",
     "node-pg-migrate": "5.9.0",
     "pg": "8.6.0",
